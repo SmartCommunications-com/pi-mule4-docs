@@ -1,0 +1,2378 @@
+
+
+= SmartIQ Client Connector Module Connector Reference
+
+
+
+== Configurations
+---
+[[Config]]
+=== Config
+
+
+==== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+|Name | String | The name for this configuration. Connectors reference the configuration with this name. | | *x*{nbsp}
+| Connection a| * <<Config_Bearer, SmartIQ Bearer Connection Provider>> {nbsp}
+* <<Config_Unsecured, SmartIQ Unsecured Connection Provider>> {nbsp}
+ | The connection types that can be provided to this configuration. | | *x*{nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  60 | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  SECONDS | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  AUTO | {nbsp}
+| Name a| String |  The identifier of this element used to reference it in other components |  | *x*{nbsp}
+| Expiration Policy a| <<ExpirationPolicy>> |  Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit. |  | {nbsp}
+|===
+
+==== Connection Types
+[[Config_Bearer]]
+===== SmartIQ Bearer Connection Provider
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Default Headers a| Array of <<DefaultHeader>> |  |  | {nbsp}
+| Query Parameters a| Array of <<DefaultQueryParam>> |  |  | {nbsp}
+| Connection Timeout a| Number |  The timeout for establishing connections to the remote service |  30 | {nbsp}
+| Connection Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Connection Timeout |  SECONDS | {nbsp}
+| Use Persistent Connections a| Boolean |  If false, each connection will be closed after the first request is completed. |  true | {nbsp}
+| Max Connections a| Number |  The maximum number of outbound connections that will be kept open at the same time |  -1 | {nbsp}
+| Connection Idle Timeout a| Number |  A timeout for how long a connection can remain idle before it is closed |  30 | {nbsp}
+| Connection Idle Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the connection Idle Timeout |  SECONDS | {nbsp}
+| Proxy Config a| <<Proxy>> |  Reusable configuration element for outbound connections through a proxy |  | {nbsp}
+| Stream Response a| Boolean |  Whether or not received responses should be streamed |  false | {nbsp}
+| Response Buffer Size a| Number |  The space in bytes for the buffer where the HTTP response will be stored. |  -1 | {nbsp}
+| Base URI a| String |  Parameter base URI, each instance/tenant gets its own |  | {nbsp}
+| Authorization a| String |  Authorization |  | {nbsp}
+| Protocol a| Enumeration, one of:
+
+** HTTP
+** HTTPS |  Protocol to use for communication. Valid values are HTTP and HTTPS |  HTTP | {nbsp}
+| TLS Configuration a| <<Tls>> |  |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+|===
+[[Config_Unsecured]]
+===== SmartIQ Unsecured Connection Provider
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Default Headers a| Array of <<DefaultHeader>> |  |  | {nbsp}
+| Query Parameters a| Array of <<DefaultQueryParam>> |  |  | {nbsp}
+| Connection Timeout a| Number |  The timeout for establishing connections to the remote service |  30 | {nbsp}
+| Connection Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Connection Timeout |  SECONDS | {nbsp}
+| Use Persistent Connections a| Boolean |  If false, each connection will be closed after the first request is completed. |  true | {nbsp}
+| Max Connections a| Number |  The maximum number of outbound connections that will be kept open at the same time |  -1 | {nbsp}
+| Connection Idle Timeout a| Number |  A timeout for how long a connection can remain idle before it is closed |  30 | {nbsp}
+| Connection Idle Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the connection Idle Timeout |  SECONDS | {nbsp}
+| Proxy Config a| <<Proxy>> |  Reusable configuration element for outbound connections through a proxy |  | {nbsp}
+| Stream Response a| Boolean |  Whether or not received responses should be streamed |  false | {nbsp}
+| Response Buffer Size a| Number |  The space in bytes for the buffer where the HTTP response will be stored. |  -1 | {nbsp}
+| Base URI a| String |  Parameter base URI, each instance/tenant gets its own |  | {nbsp}
+| Protocol a| Enumeration, one of:
+
+** HTTP
+** HTTPS |  Protocol to use for communication. Valid values are HTTP and HTTPS |  HTTP | {nbsp}
+| TLS Configuration a| <<Tls>> |  |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+|===
+
+==== Associated Operations
+* <<DeleteAnswerfilesId>> {nbsp}
+* <<DeleteInprogressanswerfilesId>> {nbsp}
+* <<DeleteOperationsId>> {nbsp}
+* <<DeleteWorkflowId>> {nbsp}
+* <<GetAlltasks>> {nbsp}
+* <<GetAnswerfiles>> {nbsp}
+* <<GetAnswerfilesId>> {nbsp}
+* <<GetForms>> {nbsp}
+* <<GetGeneratedoutputId>> {nbsp}
+* <<GetGeneratedoutputIdFileFileid>> {nbsp}
+* <<GetInprogressanswerfiles>> {nbsp}
+* <<GetInprogressanswerfilesId>> {nbsp}
+* <<GetOperations>> {nbsp}
+* <<GetOperationsId>> {nbsp}
+* <<GetWorkflow>> {nbsp}
+* <<GetWorkflowId>> {nbsp}
+* <<PatchInprogressanswerfilesId>> {nbsp}
+* <<PatchWorkflowId>> {nbsp}
+* <<PostAnswerfiles>> {nbsp}
+* <<PostGenerateId>> {nbsp}
+* <<PostInprogressanswerfiles>> {nbsp}
+* <<PostLoginAccount>> {nbsp}
+* <<PostLoginForms>> {nbsp}
+* <<PostLogoff>> {nbsp}
+* <<PostPrepareformId>> {nbsp}
+* <<PostWorkflowIdReassign>> {nbsp}
+* <<PostWorkflowIdRevert>> {nbsp}
+* <<PostWorkflowIdSubmit>> {nbsp}
+
+
+
+== Operations
+
+[[DeleteAnswerfilesId]]
+== Delete answer file by id
+`<siq-client:delete-answerfiles-id>`
+
+
+##/answerfiles/{id} This method supports deleting an Answer File. This operation makes an HTTP DELETE request to the /answerfiles/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Answer file guid |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[DeleteInprogressanswerfilesId]]
+== Delete in-progress answer file by id
+`<siq-client:delete-inprogressanswerfiles-id>`
+
+
+##/inprogressanswerfiles/{id} This method supports deleting an in-progress Answer File. This operation makes an HTTP DELETE request to the /inprogressanswerfiles/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Answer file guid |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[DeleteOperationsId]]
+== Delete operation by id
+`<siq-client:delete-operations-id>`
+
+
+##/operations/{id} Operations may support the `DELETE` action. For example, generations that are in the `notStarted` state can be deleted. Operations that cannot be deleted will return `405 Method Not Allowed`. This operation makes an HTTP DELETE request to the /operations/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Job Id |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[DeleteWorkflowId]]
+== Cancel workflow by id
+`<siq-client:delete-workflow-id>`
+
+
+##/workflow/{id} This method supports canceling a workflow task that are assigned to you. This operation makes an HTTP DELETE request to the /workflow/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Workflow state guid |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetAlltasks]]
+== Get user's in-progress tasks
+`<siq-client:get-alltasks>`
+
+
+##/alltasks This method supports retrieving a list of user's in-progress tasks. The tasks retrieved by this method are either workflow tasks or in-progress answer files. By default, a call to this method will return a list of all the user's in-progress tasks. To make responses easier to handle, the client can request for sets of paginated items by passing these query parameters: `$skip`, skip this number of rows. `$top`,return this number of rows. By doing this the response will include a `@nextLink` flag pointing to the next page of results. This operation makes an HTTP GET request to the /alltasks endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| $skip a| Number |  Skip this number of rows |  | {nbsp}
+| $top a| Number |  Return this number of rows |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetAnswerfiles]]
+== Get user's saved answer files
+`<siq-client:get-answerfiles>`
+
+
+##/answerfiles This method supports retrieving a list of user's saved Answer Files. The Answer Files retrieved by this method have been saved by the end user from the Finish Page, after completing a form in Produce. By default, a call to this method will return a list of all user's saved Answer Files. To make sure responses are easier to handle, client can request for sets of paginated items by passing these query parameters: `$skip`, skip this number of rows. `$top`,return this number of rows. By doing this the response will include a `@nextLink` flag pointing to the next page of results. This operation makes an HTTP GET request to the /answerfiles endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| $skip a| Number |  Skip this number of rows |  | {nbsp}
+| $top a| Number |  Return this number of rows |  | {nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetAnswerfilesId]]
+== Get answer file by id
+`<siq-client:get-answerfiles-id>`
+
+
+##/answerfiles/{id} This method supports retrieving an Answer File's details, including its XML. This operation makes an HTTP GET request to the /answerfiles/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Answer file guid |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetForms]]
+== Get available folders and projects (forms)
+`<siq-client:get-forms>`
+
+
+##/forms This method supports retrieving a list of the available folders and projects that the current user has permissions to run. This operation makes an HTTP GET request to the /forms endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetGeneratedoutputId]]
+== Get generated output by id
+`<siq-client:get-generatedoutput-id>`
+
+
+##/generatedoutput/{id} This method supports retrieving a list of generated documents and their location. Once the locations of generated documents are obtained, subsequent calls to the location url (`resourceLocation` url) can be made to retrieve the generated documents binaries. This operation makes an HTTP GET request to the /generatedoutput/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Job Id |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetGeneratedoutputIdFileFileid]]
+== Get generated output file by jobId and fileId
+`<siq-client:get-generatedoutput-id-file-fileid>`
+
+
+##/generatedoutput/{id}/file/{fileid} Returns generated document binary. This operation makes an HTTP GET request to the /generatedoutput/{id}/file/{fileid} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Job Id |  | *x*{nbsp}
+| fileid a| String |  File Id |  | *x*{nbsp}
+| extension a| String |  File extension with leading dot |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetInprogressanswerfiles]]
+== Get user's in-progress answer files
+`<siq-client:get-inprogressanswerfiles>`
+
+
+##/inprogressanswerfiles This method supports retrieving a list of user's in-progress Answer Files. The in-progress Answer Files retrieved by this method have been saved by the end user when a form is mid way through its execution cycle and an "In-Progress Save" is required. By default, a call to this method will return a list of all user's in-progress Answer Files. To make sure responses are easier to handle, client can request for sets of paginated items by passing these query parameters: `$skip`, skip this number of rows. `$top`,return this number of rows. By doing this the response will include a `@nextLink` flag pointing to the next page of results. This operation makes an HTTP GET request to the /inprogressanswerfiles endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| $skip a| Number |  Skip this number of rows |  | {nbsp}
+| $top a| Number |  Return this number of rows |  | {nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetInprogressanswerfilesId]]
+== Get in-progress answer files by id
+`<siq-client:get-inprogressanswerfiles-id>`
+
+
+##/inprogressanswerfiles/{id} This method supports retrieving an in-progress Answer File's details, including its XML. This operation makes an HTTP GET request to the /inprogressanswerfiles/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Answer file guid |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetOperations]]
+== Get operations
+`<siq-client:get-operations>`
+
+
+##/operations A resources state is a user addressable resource that tracks a long-running operation. The `GET` operation returns the resources state and any relevant extended information. The following states are supported: `notStarted` `running` `succeeded` `failed` Forms generations support an additional state `cancelled` This operation makes an HTTP GET request to the /operations endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Run Id a| String |  Unique form id |  | {nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetOperationsId]]
+== Get operations by id
+`<siq-client:get-operations-id>`
+
+
+##/operations/{id} A resources state is a user addressable resource that tracks a long-running operation. The `GET` operation returns the resources state and any relevant extended information. The following states are supported: `notStarted` `running` `succeeded` `failed` Forms generations support an additional state `cancelled` This operation makes an HTTP GET request to the /operations/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Job Id |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetWorkflow]]
+== Get workflow
+`<siq-client:get-workflow>`
+
+
+##/workflow This method supports retrieving list of the workflow tasks that are assigned to you or a group that you belong to. Items that assigned to a group have a boolean property indicating this as well as a flag to say whether you have it locked. Directly assigned tasks can be cancelled via the `DELETE` verb. Whether this is successful depends on project design. Locked tasks can be unlocked via the `PATCH` verb. `id`, workflow state guid. `assignedDateTime`, time that the previous user assigned this task. `assignedBy`, user name of the assigning person. `assignedType`: `Group` if this is a group assigned task, otherwise `User`. `comment`, information left by the assigning person. `publishId`, id of the form to launch. `locked`: true if you have an exclusive lock on the group task. This operation makes an HTTP GET request to the /workflow endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetWorkflowId]]
+== Get workflow by id
+`<siq-client:get-workflow-id>`
+
+
+##/workflow/{id} This method supports retrieving a workflow task. This operation makes an HTTP GET request to the /workflow/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Workflow state guid |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PatchInprogressanswerfilesId]]
+== Update in-progress answer file by id
+`<siq-client:patch-inprogressanswerfiles-id>`
+
+
+##/inprogressanswerfiles/{id} This method supports updating an in-progress Answer File. To make a request to this endpoint, a body of data will need to include these body parameters: `description`, title of the in-progress Answer File. `answerXml`, in-progress Answer File XML. This operation makes an HTTP PATCH request to the /inprogressanswerfiles/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Answer file guid |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PatchWorkflowId]]
+== Lock/Unlock workflow by id
+`<siq-client:patch-workflow-id>`
+
+
+##/workflow/{id} This method supports locking or unlocking a workflow task that is assigned a group that you belong to. This operation makes an HTTP PATCH request to the /workflow/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Workflow state guid |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PostAnswerfiles]]
+== Create answer file
+`<siq-client:post-answerfiles>`
+
+
+##/answerfiles This method supports creating an Answer File. To make a request to this endpoint, a body of data will need to include these body parameters: `description`, title of the saved Answer File. `publishId`, unique Id of the published project. `answerXml`, Answer File XML. This operation makes an HTTP POST request to the /answerfiles endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| $skip a| Number |  Skip this number of rows |  | {nbsp}
+| $top a| Number |  Return this number of rows |  | {nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PostGenerateId]]
+== Run SIQ project
+`<siq-client:post-generate-id>`
+
+
+##/generate/{id} This method supports running an SmartIQ project in an automated non-UI fashion. This operation makes an HTTP POST request to the /generate/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Publish Id (Project Group Guid) |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PostInprogressanswerfiles]]
+== Create in-progress answer file
+`<siq-client:post-inprogressanswerfiles>`
+
+
+##/inprogressanswerfiles This method supports creating an in-progress Answer File. To make a request to this endpoint, a body of data will need to include these body parameters: `description`, title of the in-progress Answer File. `publishId`, unique Id of the published project. `answerXml`, in-progress Answer File XML. This operation makes an HTTP POST request to the /inprogressanswerfiles endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| $skip a| Number |  Skip this number of rows |  | {nbsp}
+| $top a| Number |  Return this number of rows |  | {nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PostLoginAccount]]
+== Login using Windows Authentication
+`<siq-client:post-login-account>`
+
+
+##/login/account This method supports authenticating a user and retrieving a session token via Windows Authentication. For this type of authentication, there is no need to supply explicit username/password credentials since ASP.NET and IIS can automatically retrieve and validate the Windows username of the end-user who is currently logged on to the Windows operating system and authenticate them in a secure way. This operation makes an HTTP POST request to the /login/account endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PostLoginForms]]
+== Login using username/password
+`<siq-client:post-login-forms>`
+
+
+##/login/forms This method supports authenticating a user and retrieving a session token via Forms Authentication. This operation makes an HTTP POST request to the /login/forms endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PostLogoff]]
+== Logout session token
+`<siq-client:post-logoff>`
+
+
+Expire session token This operation makes an HTTP POST request to the /logoff endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PostPrepareformId]]
+== Prepare form by id
+`<siq-client:post-prepareform-id>`
+
+
+##/prepareform/{id} This method supports running an SmartIQ form with pre-supplied data. This operation makes an HTTP POST request to the /prepareform/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Publish Id (Project Group Guid) |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PostWorkflowIdReassign]]
+== Reassign workflow by id
+`<siq-client:post-workflow-id-reassign>`
+
+
+##/workflow/{id}/reassign This method supports reassigning a workflow item that is currently directly assigned to you. `comment`, optional. Comment for the assignment to the next user. `assignToGuid`, optional. The user GUID to assign the next state to. `assignToName`, optional. The user name to assign the next state to.If both `assignToGuid` and `assignToName` are supplied then the GUID will be used. At least one of these properties must be supplied. Required Parameters: `assignToGuid` This operation makes an HTTP POST request to the /workflow/{id}/reassign endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Workflow state guid |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PostWorkflowIdRevert]]
+== Revert workflow by id
+`<siq-client:post-workflow-id-revert>`
+
+
+Create workflow revert by id This operation makes an HTTP POST request to the /workflow/{id}/revert endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Workflow guid |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PostWorkflowIdSubmit]]
+== Submit workflow by id
+`<siq-client:post-workflow-id-submit>`
+
+
+##/workflow/{id}/submit This method allows to transition a workflow to the next step (including Finish) in an automated (non-UI) fashion. This operation makes an HTTP POST request to the /workflow/{id}/submit endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| String |  Workflow guid |  | *x*{nbsp}
+| As User a| String |  Username or Guid of user to impersonate |  | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | {nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SIQ-CLIENT:BAD_REQUEST {nbsp}
+* SIQ-CLIENT:CLIENT_ERROR {nbsp}
+* SIQ-CLIENT:CONNECTIVITY {nbsp}
+* SIQ-CLIENT:INTERNAL_SERVER_ERROR {nbsp}
+* SIQ-CLIENT:NOT_ACCEPTABLE {nbsp}
+* SIQ-CLIENT:NOT_FOUND {nbsp}
+* SIQ-CLIENT:RETRY_EXHAUSTED {nbsp}
+* SIQ-CLIENT:SERVER_ERROR {nbsp}
+* SIQ-CLIENT:SERVICE_UNAVAILABLE {nbsp}
+* SIQ-CLIENT:TIMEOUT {nbsp}
+* SIQ-CLIENT:TOO_MANY_REQUESTS {nbsp}
+* SIQ-CLIENT:UNAUTHORIZED {nbsp}
+* SIQ-CLIENT:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+
+== Types
+[[DefaultHeader]]
+=== Default Header
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Key a| String |  |  | x
+| Value a| String |  |  | x
+|======================
+
+[[DefaultQueryParam]]
+=== Default Query Param
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Key a| String |  |  | x
+| Value a| String |  |  | x
+|======================
+
+[[Proxy]]
+=== Proxy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Host a| String |  |  | x
+| Port a| Number |  |  | x
+| Username a| String |  |  | 
+| Password a| String |  |  | 
+| Non Proxy Hosts a| String |  |  | 
+|======================
+
+[[Tls]]
+=== Tls
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Enabled Protocols a| String | A comma separated list of protocols enabled for this context. |  | 
+| Enabled Cipher Suites a| String | A comma separated list of cipher suites enabled for this context. |  | 
+| Trust Store a| <<TrustStore>> |  |  | 
+| Key Store a| <<KeyStore>> |  |  | 
+| Revocation Check a| * <<StandardRevocationCheck>>
+* <<CustomOcspResponder>>
+* <<CrlFile>> |  |  | 
+|======================
+
+[[TrustStore]]
+=== Trust Store
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The location (which will be resolved relative to the current classpath and file system, if possible) of the trust store. |  | 
+| Password a| String | The password used to protect the trust store. |  | 
+| Type a| String | The type of store used. |  | 
+| Algorithm a| String | The algorithm used by the trust store. |  | 
+| Insecure a| Boolean | If true, no certificate validations will be performed, rendering connections vulnerable to attacks. Use at your own risk. |  | 
+|======================
+
+[[KeyStore]]
+=== Key Store
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The location (which will be resolved relative to the current classpath and file system, if possible) of the key store. |  | 
+| Type a| String | The type of store used. |  | 
+| Alias a| String | When the key store contains many private keys, this attribute indicates the alias of the key that should be used. If not defined, the first key in the file will be used by default. |  | 
+| Key Password a| String | The password used to protect the private key. |  | 
+| Password a| String | The password used to protect the key store. |  | 
+| Algorithm a| String | The algorithm used by the key store. |  | 
+|======================
+
+[[StandardRevocationCheck]]
+=== Standard Revocation Check
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Only End Entities a| Boolean | Only verify the last element of the certificate chain. |  | 
+| Prefer Crls a| Boolean | Try CRL instead of OCSP first. |  | 
+| No Fallback a| Boolean | Do not use the secondary checking method (the one not selected before). |  | 
+| Soft Fail a| Boolean | Avoid verification failure when the revocation server can not be reached or is busy. |  | 
+|======================
+
+[[CustomOcspResponder]]
+=== Custom Ocsp Responder
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Url a| String | The URL of the OCSP responder. |  | 
+| Cert Alias a| String | Alias of the signing certificate for the OCSP response (must be in the trust store), if present. |  | 
+|======================
+
+[[CrlFile]]
+=== Crl File
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The path to the CRL file. |  | 
+|======================
+
+[[Reconnection]]
+=== Reconnection
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Fails Deployment a| Boolean | When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | 
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> | The reconnection strategy to use |  | 
+|======================
+
+[[Reconnect]]
+=== Reconnect
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+| Count a| Number | How many reconnection attempts to make |  | 
+|======================
+
+[[ReconnectForever]]
+=== Reconnect Forever
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+|======================
+
+[[ExpirationPolicy]]
+=== Expiration Policy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Max Idle Time a| Number | A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration |  | 
+| Time Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS | A time unit that qualifies the maxIdleTime attribute |  | 
+|======================
+
+[[HttpResponseAttributes]]
+=== Http Response Attributes
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Status Code a| Number |  |  | x
+| Headers a| Object |  |  | x
+| Reason Phrase a| String |  |  | x
+|======================
+
+[[RepeatableInMemoryStream]]
+=== Repeatable In Memory Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Initial Buffer Size a| Number | This is the amount of memory that will be allocated in order to consume the stream and provide random access to it. If the stream contains more data than can be fit into this buffer, then it will be expanded by according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize. |  | 
+| Buffer Size Increment a| Number | This is by how much will be buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full. |  | 
+| Max Buffer Size a| Number | This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which all these attributes are expressed |  | 
+|======================
+
+[[RepeatableFileStoreStream]]
+=== Repeatable File Store Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| In Memory Size a| Number | Defines the maximum memory that the stream should use to keep data in memory. If more than that is consumed then it will start to buffer the content on disk. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which maxInMemorySize is expressed |  | 
+|======================
+
