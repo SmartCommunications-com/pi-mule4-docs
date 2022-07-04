@@ -1,0 +1,3660 @@
+
+
+= CMS Connector Module Connector Reference
+
+
+
+== Configurations
+---
+[[Config]]
+=== Config
+
+
+==== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+|Name | String | The name for this configuration. Connectors reference the configuration with this name. | | *x*{nbsp}
+| Connection a| * <<Config_Oauth1, SmartComm OAuth1 Connection Provider>> {nbsp}
+* <<Config_Oauth2ClientCredentials, SmartComm CMS OAuth2 Client Credentials Connection Provider>> {nbsp}
+ | The connection types that can be provided to this configuration. | | *x*{nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  60 | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  SECONDS | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  AUTO | {nbsp}
+| Name a| String |  The identifier of this element used to reference it in other components |  | *x*{nbsp}
+| Expiration Policy a| <<ExpirationPolicy>> |  Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit. |  | {nbsp}
+|===
+
+==== Connection Types
+[[Config_Oauth1]]
+===== SmartComm OAuth1 Connection Provider
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Default Headers a| Array of <<DefaultHeader>> |  |  | {nbsp}
+| Query Parameters a| Array of <<DefaultQueryParam>> |  |  | {nbsp}
+| Connection Timeout a| Number |  The timeout for establishing connections to the remote service |  30 | {nbsp}
+| Connection Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Connection Timeout |  SECONDS | {nbsp}
+| Use Persistent Connections a| Boolean |  If false, each connection will be closed after the first request is completed. |  true | {nbsp}
+| Max Connections a| Number |  The maximum number of outbound connections that will be kept open at the same time |  -1 | {nbsp}
+| Connection Idle Timeout a| Number |  A timeout for how long a connection can remain idle before it is closed |  30 | {nbsp}
+| Connection Idle Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the connection Idle Timeout |  SECONDS | {nbsp}
+| Proxy Config a| <<Proxy>> |  Reusable configuration element for outbound connections through a proxy |  | {nbsp}
+| Stream Response a| Boolean |  Whether or not received responses should be streamed |  false | {nbsp}
+| Response Buffer Size a| Number |  The space in bytes for the buffer where the HTTP response will be stored. |  -1 | {nbsp}
+| Base URI a| String |  The base uri of the REST API being consumed |  | {nbsp}
+| User Id a| String |  The user id to authenticate the requests |  | *x*{nbsp}
+| Consumer Key a| String |  The consumer key to authenticate the requests |  | *x*{nbsp}
+| Consumer Secret a| String |  The consumer secret to authenticate the requests |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+|===
+[[Config_Oauth2ClientCredentials]]
+===== SmartComm CMS OAuth2 Client Credentials Connection Provider
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Default Headers a| Array of <<DefaultHeader>> |  |  | {nbsp}
+| Query Parameters a| Array of <<DefaultQueryParam>> |  |  | {nbsp}
+| Connection Timeout a| Number |  The timeout for establishing connections to the remote service |  30 | {nbsp}
+| Connection Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Connection Timeout |  SECONDS | {nbsp}
+| Use Persistent Connections a| Boolean |  If false, each connection will be closed after the first request is completed. |  true | {nbsp}
+| Max Connections a| Number |  The maximum number of outbound connections that will be kept open at the same time |  -1 | {nbsp}
+| Connection Idle Timeout a| Number |  A timeout for how long a connection can remain idle before it is closed |  30 | {nbsp}
+| Connection Idle Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the connection Idle Timeout |  SECONDS | {nbsp}
+| Proxy Config a| <<Proxy>> |  Reusable configuration element for outbound connections through a proxy |  | {nbsp}
+| Stream Response a| Boolean |  Whether or not received responses should be streamed |  false | {nbsp}
+| Response Buffer Size a| Number |  The space in bytes for the buffer where the HTTP response will be stored. |  -1 | {nbsp}
+| Base URI a| String |  Parameter base URI, each instance/tenant gets its own |  | {nbsp}
+| Protocol a| Enumeration, one of:
+
+** HTTP
+** HTTPS |  Protocol to use for communication. Valid values are HTTP and HTTPS |  HTTP | {nbsp}
+| TLS Configuration a| <<Tls>> |  |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+| Client Id a| String |  The OAuth client id as registered with the service provider |  | *x*{nbsp}
+| Client Secret a| String |  The OAuth client secret as registered with the service provider |  | *x*{nbsp}
+| Token Url a| String |  The service provider's token endpoint URL |  /one/oauth2Server/token | {nbsp}
+| Scopes a| String |  The OAuth scopes to be requested during the dance. If not provided, it will default to those in the annotation |  | {nbsp}
+| Object Store a| String |  A reference to the object store that should be used to store each resource owner id's data. If not specified, runtime will automatically provision the default one. |  | {nbsp}
+|===
+
+==== Associated Operations
+* <<BeginExportProject>> {nbsp}
+* <<BranchResourceVersion>> {nbsp}
+* <<CheckConflict>> {nbsp}
+* <<CheckInResourceVersion>> {nbsp}
+* <<CreateAnnotation>> {nbsp}
+* <<CreateFolder>> {nbsp}
+* <<CreateProject>> {nbsp}
+* <<CreateResource>> {nbsp}
+* <<CreateUpdateResourceMetadata>> {nbsp}
+* <<DeleteProject>> {nbsp}
+* <<DeleteResource>> {nbsp}
+* <<DeleteResourceMetadata>> {nbsp}
+* <<DeleteResourceVersion>> {nbsp}
+* <<ExportPackage>> {nbsp}
+* <<FinalizeImport>> {nbsp}
+* <<GetBrand>> {nbsp}
+* <<GetContent>> {nbsp}
+* <<GetFolderByPath>> {nbsp}
+* <<GetLatestVersion>> {nbsp}
+* <<GetMetadataByResourceCategory>> {nbsp}
+* <<GetProject>> {nbsp}
+* <<GetReferenceGraph>> {nbsp}
+* <<GetResource>> {nbsp}
+* <<GetResourceMetadata>> {nbsp}
+* <<GetResourceVersion>> {nbsp}
+* <<GetResourceVersions>> {nbsp}
+* <<ListAnnotations>> {nbsp}
+* <<ListBrands>> {nbsp}
+* <<ListChannels>> {nbsp}
+* <<ListFolderItems>> {nbsp}
+* <<ListFolders>> {nbsp}
+* <<ListIdioms>> {nbsp}
+* <<ListJurisdictions>> {nbsp}
+* <<ListLanguages>> {nbsp}
+* <<ListProjectItems>> {nbsp}
+* <<ListProjects>> {nbsp}
+* <<PrepareImportPackage>> {nbsp}
+* <<ReleaseProject>> {nbsp}
+* <<RollbackProject>> {nbsp}
+* <<Search>> {nbsp}
+* <<SearchCmsbyResourceCategory>> {nbsp}
+* <<Unauthorize>> {nbsp}
+* <<UndoResourceVersionCheckOut>> {nbsp}
+* <<UpdateFolderRights>> {nbsp}
+* <<UpdateProjectRights>> {nbsp}
+* <<UpdateResourceVersion>> {nbsp}
+* <<WithdrawResourceVersion>> {nbsp}
+
+
+
+== Operations
+
+[[BeginExportProject]]
+== Begin Export Project
+`<sc-cms:begin-export-project>`
+
+
+Constructs an export package's manifest file that it uses as input in the multipart export and returns as text/XML. When used with [Export Package], this API call exports items from the CMS to a package containing the specified resource versions for migration to another system. Use this API call first. This operation makes an HTTP GET request to the /v8/export/references endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| type a| Number |  The type of export, where '1' exports a project, '2' exports a resource and '3' exports a folder |  | *x*{nbsp}
+| id a| Number |  The project/resource/folder ID |  | *x*{nbsp}
+| Include References a| Boolean |  Boolean flag to indicate whether to include referenced items in the export. Possible values are true or false. If true, referenced items are included in the export. |  false | {nbsp}
+| Include Only Released a| Boolean |  Boolean flag to indicate whether to include released items in the export |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[BranchResourceVersion]]
+== Branch Resource Version
+`<sc-cms:branch-resource-version>`
+
+
+Performs a branch operation on the desired resource version This operation makes an HTTP POST request to the /v8/versions/{id}/branch endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The resource version ID to be branched |  | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[CheckConflict]]
+== Check Conflict
+`<sc-cms:check-conflict>`
+
+
+This API call checks import conflicts for a given import process ID and is the second of three calls used to import a package into the CMS from a given location. To complete the process, use this call after [Prepare Import Package] and then use the [Finalize Import]' call. The PackageItemStatuses DTO returned is used as an input parameter of the third call. It contains an array of PackageItemStatuses objects, which contain an array of conflicts. This operation makes an HTTP GET request to the /v8/import/checkConflict/{importProcessId} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Import Process Id a| String |  ID that identifies this process |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[CheckInResourceVersion]]
+== Check In Resource Version
+`<sc-cms:check-in-resource-version>`
+
+
+Performs a check in of a resource version with optional annotations This operation makes an HTTP POST request to the /v8/versions/{id}/checkin endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  ID parameter of resource version to check in and/or create annotation against |  | *x*{nbsp}
+| Has Open - Body a| Boolean |  The content of the 'Has Open' part. |  false | {nbsp}
+| Annotation Text - Body a| String |  The content of the 'Annotation Text' part. |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[CreateAnnotation]]
+== Create Annotation
+`<sc-cms:create-annotation>`
+
+
+Generates an annotation for the given resource version ID This operation makes an HTTP POST request to the /v8/annotations endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[CreateFolder]]
+== Create Folder
+`<sc-cms:create-folder>`
+
+
+Creates a child folder in the CMS This operation makes an HTTP POST request to the /v8/folders endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[CreateProject]]
+== Create Project
+`<sc-cms:create-project>`
+
+
+Adds a new project to the CMS This operation makes an HTTP POST request to the /v8/projects endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[CreateResource]]
+== Create Resource
+`<sc-cms:create-resource>`
+
+
+Creates a new CMS resource with the specified parameters. In the response; typeId=19, indicates the CMS Resource. typeId=20, indicates the CMS Resource Version. Please note, the result will be a new Resource Version with no content. Content should be set by calling the next API under the ResourceVersions: Set Content (multipart). This operation makes an HTTP POST request to the /v8/resources endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[CreateUpdateResourceMetadata]]
+== Create Update Resource Metadata
+`<sc-cms:create-update-resource-metadata>`
+
+
+Assigns a category to a resource version or updates metadata of an existing category for the specified resource version. The resource version must be in checked out state for the current user. When assigning or updating category metadata for a resource version, the new metadata will be validated against the schema defined in the category. If validation fails, the request will be rejected. This operation makes an HTTP POST request to the /v8/versions/{id}/metadata/{categoryId} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the resource version for which you wish to create or update category metadata. |  | *x*{nbsp}
+| Category Id a| Number |  The category ID to be assigned to the specified resource version or to be updated for the specified resource version. |  | *x*{nbsp}
+| Body a| <<Org}root>> |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[DeleteProject]]
+== Delete Project
+`<sc-cms:delete-project>`
+
+
+Deletes a project by ID This operation makes an HTTP DELETE request to the /v8/projects/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  ID of project to delete |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[DeleteResource]]
+== Delete Resource
+`<sc-cms:delete-resource>`
+
+
+Deletes a resource and associated resource versions. A resource cannot be deleted where there are one or more checked out resource versions. Ensure that resource versions are checked in or withdrawn using [Undo Checkout] before using this API call. This operation makes an HTTP DELETE request to the /v8/resources/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  ID of resource to delete |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[DeleteResourceMetadata]]
+== Delete Resource Metadata
+`<sc-cms:delete-resource-metadata>`
+
+
+Removes the specified assigned category from the specified resource version. The resource version must be in checked out state for the current user. The specified category must be assigned to the resource version. This operation makes an HTTP DELETE request to the /v8/versions/{id}/metadata/{categoryId} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the resource version for which you wish to remove the specified category. |  | *x*{nbsp}
+| Category Id a| Number |  The category ID to be removed from the specified resource version. |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[DeleteResourceVersion]]
+== Delete Resource Version
+`<sc-cms:delete-resource-version>`
+
+
+Deletes a (not checked-out) resource version This operation makes an HTTP DELETE request to the /v8/versions/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the resource version that you wish to delete |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ExportPackage]]
+== Export Package
+`<sc-cms:export-package>`
+
+
+When used with [Begin Project Export], this API call exports items from the CMS to a package containing the specified resource versions, for migration to another system. The exported package is cached in the resource cache. Use Begin Project Export first. To use as a multipart post, set the request?s contentType header to "multipart/form-data". Takes the package.xml manifest file as input. This operation makes an HTTP POST request to the /v8/export endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| File - Body a| String |  The content of the 'file' part. |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[FinalizeImport]]
+== Finalize Import
+`<sc-cms:finalize-import>`
+
+
+This API call is the last of three calls used to import a package into the CMS from a given location. It should be used after [Prepare Import Package] and [Check Import Conflicts]. The PackageItemStatuses DTO returned by the 'Check Import Conflicts' call is used as an input parameter. It contains an array of PackageItemStatuses objects, which contain an array of conflicts. This operation makes an HTTP POST request to the /v8/import/finalize endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetBrand]]
+== Get Brand
+`<sc-cms:get-brand>`
+
+
+Returns details of the specified brand This operation makes an HTTP GET request to the /v8/brands/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the brand |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetContent]]
+== Get Content
+`<sc-cms:get-content>`
+
+
+Returns the content of the requested resource version as a stream. The MIME type of the data will vary with the type of the resource being requested.Adds optional content-disposition header with disposition-type = "attachment". This operation makes an HTTP GET request to the /v8/versions/{id}/content endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the resource version |  | *x*{nbsp}
+| filename a| String |  Query parameter. If passed it will form the disposition-param of content-disposition header added to the response. |  | {nbsp}
+| indent a| Boolean |  Query parameter to indent XML content (pretty-print) |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetFolderByPath]]
+== Get Folder By Path
+`<sc-cms:get-folder-by-path>`
+
+
+Retrieves information relating to a folder specified by a path. Can be used in conjunction with listFolderItems to retrieve the items in a folder by path. This operation makes an HTTP GET request to the /v8/folders/getFolder endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| path a| String |  The full URL encoded path to the folder |  | *x*{nbsp}
+| Include Rights a| Boolean |  Boolean flag to determine whether to include security details |  false | {nbsp}
+| Include Effective Rights a| Boolean |  Boolean flag to determine whether to include effective rights for the current user |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetLatestVersion]]
+== Get Latest Version
+`<sc-cms:get-latest-version>`
+
+
+Returns the latest resource version for a specific resource.This call uses Resource ID as a Path Parameter and project scope for the query. This operation makes an HTTP GET request to the /v8/resources/{id}/latestversion endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the resource, whose version will be returned |  | *x*{nbsp}
+| Project Scope a| String |  The possible values for project scope are: ALL All projects (default) RELEASED Released projects PUBLISHED Published projects a project ID A specific project |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetMetadataByResourceCategory]]
+== Get Metadata By Resource Category
+`<sc-cms:get-metadata-by-resource-category>`
+
+
+Searches the CMS using a query of the Categories metadata associated with resources. Given the same criteria this API call returns the same resources as would be returned by a dynamic query using metadata performed through the assembly process. This call then returns the metadata for the most effective version of all matching resources. The search process functions as follows: Identify resource versions that match on the basis of the metadata query (including being in correct folder or sub folder if one is specified). Identify the corresponding resource to which those resource versions belong. If there are multiple versions matching then they are sorted by Major, Minor, revision and effective date difference in descending order. The first or only match is returned. This operation makes an HTTP POST request to the /v8/metadata/searchByResourceCategory endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetProject]]
+== Get Project
+`<sc-cms:get-project>`
+
+
+Returns the details of the specified project ID This operation makes an HTTP GET request to the /v8/projects/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The path parameter ID of the project |  | *x*{nbsp}
+| Include Rights a| Boolean |  Query parameter that allows you to include security details |  false | {nbsp}
+| Include Workflow a| Boolean |  Query parameter for whether to include information about the workflow status |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetReferenceGraph]]
+== Get Reference Graph
+`<sc-cms:get-reference-graph>`
+
+
+Provides a graph of object relationships within the CMS. The graph is a list of nodes (resources, versions, channels, etc) and edges (the references between nodes). This operation makes an HTTP GET request to the /v8/search/referenceGraph endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| type a| Number |  The type of object from which to build the graph. Types are numeric security system constants. The possible values are JURISDICTION = 12, IDIOM = 13, LANGUAGE = 14, CMSRESOURCE = 19, CMSRESOURCEVERSION = 20, CHANNEL = 23, BRAND = 31 |  | *x*{nbsp}
+| id a| Number |  The instance id of the object from which to build the graph. |  | *x*{nbsp}
+| Show Versions a| Boolean |  Boolean flag to determine whether references from versions are shown individually (true), or aggregated (false). The default is false. |  false | {nbsp}
+| Project Scope a| String |  The project scope which can be PROJECT, RELEASED, PUBLISHED or ALL. The default is ALL |  ALL | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetResource]]
+== Get Resource
+`<sc-cms:get-resource>`
+
+
+Returns details of the specified resource. The resourceVersion value will always appear as null in JSON format. For XML the resourceVersion is absent from the response as null values are not serialized. This operation makes an HTTP GET request to the /v8/resources/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the resource |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetResourceMetadata]]
+== Get Resource Metadata
+`<sc-cms:get-resource-metadata>`
+
+
+Retrieves all the metadata associated with the specified resource version and, optionally, the resource category. Metadata will only be returned for those categories to which the calling user has view rights, so the user must have view rights on the resource version. This operation makes an HTTP GET request to the /v8/versions/{id}/metadata/{categoryId} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the resource version for which you wish to return metadata |  | *x*{nbsp}
+| Category Id a| Number |  The specific category for which to return metadata when the resource version implements more than one. The default value is -1. |  -1 | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetResourceVersion]]
+== Get Resource Version
+`<sc-cms:get-resource-version>`
+
+
+Returns the details of the specified resource version This operation makes an HTTP GET request to the /v8/versions/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the resource version |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetResourceVersions]]
+== Get Resource Versions
+`<sc-cms:get-resource-versions>`
+
+
+Return the resource versions associated with a specific resource This operation makes an HTTP GET request to the /v8/resources/{id}/versions endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the resource for which resource versions will be returned |  | *x*{nbsp}
+| Show Withdrawn a| Boolean |  Flag to determine whether withdrawn resource versions should be displayed |  false | {nbsp}
+| Include User And Project Name a| Boolean |  Flag to determine whether the user name, user ID and project name will be added to the response |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListAnnotations]]
+== List Annotations
+`<sc-cms:list-annotations>`
+
+
+Returns a list of the annotations associated with a resource version This operation makes an HTTP GET request to the /v8/versions/{id}/annotations endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the resource version for which you wish to view annotations |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListBrands]]
+== List Brands
+`<sc-cms:list-brands>`
+
+
+Returns a list of all brands This operation makes an HTTP GET request to the /v8/brands endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListChannels]]
+== List Channels
+`<sc-cms:list-channels>`
+
+
+Returns a list of all channels This operation makes an HTTP GET request to the /v8/channels endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListFolderItems]]
+== List Folder Items
+`<sc-cms:list-folder-items>`
+
+
+Returns a list of the items by ID in the specified folder, including tags, description and paths This operation makes an HTTP GET request to the /v8/folders/{id}/items endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  ID of folder from which to list items |  | *x*{nbsp}
+| Include Effective Rights a| Boolean |  Boolean flag to determine whether to include effective rights for the current user |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListFolders]]
+== List Folders
+`<sc-cms:list-folders>`
+
+
+Returns cms folder list ordered by level; optionally including group access rights when includeRights=true This operation makes an HTTP GET request to the /v8/folders endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Include Rights a| Boolean |  Boolean flag to determine whether to include group security rights for each folder |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListIdioms]]
+== List Idioms
+`<sc-cms:list-idioms>`
+
+
+Returns a list of all Idioms This operation makes an HTTP GET request to the /v8/idioms endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListJurisdictions]]
+== List Jurisdictions
+`<sc-cms:list-jurisdictions>`
+
+
+Gets a list of all jurisdictions This operation makes an HTTP GET request to the /v8/jurisdictions endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListLanguages]]
+== List Languages
+`<sc-cms:list-languages>`
+
+
+Returns a list of all languages This operation makes an HTTP GET request to the /v8/languages endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListProjectItems]]
+== List Project Items
+`<sc-cms:list-project-items>`
+
+
+Returns a list of the project items associated with a project This operation makes an HTTP GET request to the /v8/projects/{id}/items endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the project whose items you wish to list |  | *x*{nbsp}
+| Revisions Filter a| String |  Filter the resource versions in the project to return. Can be All=Return all versions, Max=Return the maximum revision of each version attached to the project only, MaxRevisionForMinor=Return the maximum revision for each minor version |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListProjects]]
+== List Projects
+`<sc-cms:list-projects>`
+
+
+Returns a list of all projects on this tenancy with or without the access rights. This operation makes an HTTP GET request to the /v8/projects endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Include Rights a| Boolean |  Boolean flag to determine whether to include access rights details. If includeRights is set to true, the response will contain a list of all the projects with the group name and access rights for each project. The returned result will contain the root node: ProjectWithRightss (if includeRights is set to true) or Projects (if includeRights is set to false), and one node per each project: projectWithRights (if includeRights is set to true) or project (if includeRights is set to false). |  false | {nbsp}
+| Include Workflow a| Boolean |  Query parameter for whether to include information about the workflow status |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PrepareImportPackage]]
+== Prepare Import Package
+`<sc-cms:prepare-import-package>`
+
+
+This API call is the first of three calls used to import a package into the CMS from a given location. To complete the process, use [Check Import Conflicts] and then [Finalize Import] after this call. To call as a multipart post, set the request's contentType header to multipart/form-data . You can also use Advanced Template Designer to import packages. See [Import Package] in the Smart Comms Help for more information. This operation makes an HTTP POST request to the /v8/import/prepare endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| File - Body a| String |  The content of the 'file' part. |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ReleaseProject]]
+== Release Project
+`<sc-cms:release-project>`
+
+
+Releases a project which currently has a status of 'In Development'. Will not release a project which has a status of 'In Workflow'. This operation makes an HTTP POST request to the /v8/projects/{id}/release endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the project that you wish to release |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[RollbackProject]]
+== Rollback Project
+`<sc-cms:rollback-project>`
+
+
+Changes a Project with a status of 'Released' back to 'In Development' This operation makes an HTTP POST request to the /v8/projects/{id}/rollback endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the project that you wish to rollback |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[Search]]
+== Search
+`<sc-cms:search>`
+
+
+Returns resources that match the specified parameters This operation makes an HTTP GET request to the /v8/search endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Folder Id a| Number |  The folder ID from which to search resources. The default is 1. |  1 | {nbsp}
+| recursive a| Boolean |  Flag to indicate whether resources are searched in subfolders. If true, all subfolders are searched, else if false only the folder specified is searched. You need to supply the string =true where true is case-insensitive; for example, recursive=true or recursive=True. Any value other than =true, for example, =y or if the parameter is omitted will be treated as if you had supplied the string =false. |  false | {nbsp}
+| Mime Type a| Array of String |  The MIME types to be searched. This parameter can be specified zero or multiple times to create a list of MIME types to be used in filtering the results. |  | {nbsp}
+| name a| String |  A non case sensitive resource name on which to filter. Wildcards can be used, otherwise the name should match exactly. |  | {nbsp}
+| description a| String |  A non case sensitive text description of the resource on which to filter. Wildcards can be used, otherwise the text should match exactly. |  | {nbsp}
+| keywords a| String |  Optional keywords/tags to search for. This parameter can be omitted if a keyword/tag search is not required. Multiple keywords/tags can be searched by separating values with a comma. When searching for multiple keywords/tags only resources with all of them are returned. |  | {nbsp}
+| start a| Number |  The start page number, used for paging the results when a large number of results are returned. The index of the first result in the result set should be included in the response. Default is -1 which does not set a start page number. |  -1 | {nbsp}
+| limit a| Number |  The maximum number of results on a page, used to limit the number of results included in the response for paging when a large number of results are returned. Default is -1. If this parameter is omitted, a maximum number of results per page is not set, and all results from the start position specified will be included. |  -1 | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[SearchCmsbyResourceCategory]]
+== Search Cms By Resource Category
+`<sc-cms:search-cmsby-resource-category>`
+
+
+Searches the CMS using a metadata query parameter and other values provided in the search criteria parameters. Given the same criteria this call returns the same resources as would be returned by a dynamic query using metadata performed through the assembly process. This call then returns the metadata for the most effective version of all matching resources. The search process functions as follows: Identify resource versions that match on the basis of the metadata query (including being in correct folder or sub folder if one is specified). Identify the corresponding resource to which those resource versions belong. Identify the most effective resource version. If the Resource Version identified in step 1 (Match on Metadata) is also the most effective version of that Resource, identified in step 2, then the Resource will be considered a match and returned in the results. This operation makes an HTTP POST request to the /v8/resources/searchByResourceCategory endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[Unauthorize]]
+== Unauthorize
+`<sc-cms:unauthorize>`
+
+
+Deletes all the access token information of a given resource owner id so that it's impossible to execute any operation for that user without doing the authorization dance again
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+|===
+
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+
+
+[[UndoResourceVersionCheckOut]]
+== Undo Resource Version Check Out
+`<sc-cms:undo-resource-version-check-out>`
+
+
+Performs undo check out of a resource version This operation makes an HTTP POST request to the /v8/versions/{id}/undocheckout endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  ID parameter of resource version for which to undo check out |  | *x*{nbsp}
+| Has Open - Body a| Boolean |  The content of the 'Has Open' part. |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[UpdateFolderRights]]
+== Update Folder Rights
+`<sc-cms:update-folder-rights>`
+
+
+Update Groups and Rights of a CMS folder This operation makes an HTTP PUT request to the /v8/folders/{id}/rights endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the folder whose groups/rights you wish to update |  | *x*{nbsp}
+| Body a| Array of Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[UpdateProjectRights]]
+== Update Project Rights
+`<sc-cms:update-project-rights>`
+
+
+Update Groups and Rights of a CMS project This operation makes an HTTP PUT request to the /v8/projects/{id}/rights endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the project whose groups/rights you wish to update |  | *x*{nbsp}
+| Body a| Array of Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[UpdateResourceVersion]]
+== Update Resource Version
+`<sc-cms:update-resource-version>`
+
+
+Modifies the properties of a resource version This operation makes an HTTP PUT request to the /v8/versions/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The ID of the resource version that you wish to update |  | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[WithdrawResourceVersion]]
+== Withdraw Resource Version
+`<sc-cms:withdraw-resource-version>`
+
+
+Succeeds only if at least one other non-withdrawn version exists This operation makes an HTTP POST request to the /v8/versions/{id}/withdraw endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| id a| Number |  The resource version ID to be withdrawn |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-CMS:BAD_REQUEST {nbsp}
+* SC-CMS:CLIENT_ERROR {nbsp}
+* SC-CMS:CONNECTIVITY {nbsp}
+* SC-CMS:INTERNAL_SERVER_ERROR {nbsp}
+* SC-CMS:NOT_ACCEPTABLE {nbsp}
+* SC-CMS:NOT_FOUND {nbsp}
+* SC-CMS:RETRY_EXHAUSTED {nbsp}
+* SC-CMS:SERVER_ERROR {nbsp}
+* SC-CMS:SERVICE_UNAVAILABLE {nbsp}
+* SC-CMS:TIMEOUT {nbsp}
+* SC-CMS:TOO_MANY_REQUESTS {nbsp}
+* SC-CMS:UNAUTHORIZED {nbsp}
+* SC-CMS:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+
+== Types
+[[DefaultHeader]]
+=== Default Header
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Key a| String |  |  | x
+| Value a| String |  |  | x
+|======================
+
+[[DefaultQueryParam]]
+=== Default Query Param
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Key a| String |  |  | x
+| Value a| String |  |  | x
+|======================
+
+[[Proxy]]
+=== Proxy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Host a| String |  |  | x
+| Port a| Number |  |  | x
+| Username a| String |  |  | 
+| Password a| String |  |  | 
+| Non Proxy Hosts a| String |  |  | 
+|======================
+
+[[Reconnection]]
+=== Reconnection
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Fails Deployment a| Boolean | When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | 
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> | The reconnection strategy to use |  | 
+|======================
+
+[[Reconnect]]
+=== Reconnect
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+| Count a| Number | How many reconnection attempts to make |  | 
+|======================
+
+[[ReconnectForever]]
+=== Reconnect Forever
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+|======================
+
+[[Tls]]
+=== Tls
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Enabled Protocols a| String | A comma separated list of protocols enabled for this context. |  | 
+| Enabled Cipher Suites a| String | A comma separated list of cipher suites enabled for this context. |  | 
+| Trust Store a| <<TrustStore>> |  |  | 
+| Key Store a| <<KeyStore>> |  |  | 
+| Revocation Check a| * <<StandardRevocationCheck>>
+* <<CustomOcspResponder>>
+* <<CrlFile>> |  |  | 
+|======================
+
+[[TrustStore]]
+=== Trust Store
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The location (which will be resolved relative to the current classpath and file system, if possible) of the trust store. |  | 
+| Password a| String | The password used to protect the trust store. |  | 
+| Type a| String | The type of store used. |  | 
+| Algorithm a| String | The algorithm used by the trust store. |  | 
+| Insecure a| Boolean | If true, no certificate validations will be performed, rendering connections vulnerable to attacks. Use at your own risk. |  | 
+|======================
+
+[[KeyStore]]
+=== Key Store
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The location (which will be resolved relative to the current classpath and file system, if possible) of the key store. |  | 
+| Type a| String | The type of store used. |  | 
+| Alias a| String | When the key store contains many private keys, this attribute indicates the alias of the key that should be used. If not defined, the first key in the file will be used by default. |  | 
+| Key Password a| String | The password used to protect the private key. |  | 
+| Password a| String | The password used to protect the key store. |  | 
+| Algorithm a| String | The algorithm used by the key store. |  | 
+|======================
+
+[[StandardRevocationCheck]]
+=== Standard Revocation Check
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Only End Entities a| Boolean | Only verify the last element of the certificate chain. |  | 
+| Prefer Crls a| Boolean | Try CRL instead of OCSP first. |  | 
+| No Fallback a| Boolean | Do not use the secondary checking method (the one not selected before). |  | 
+| Soft Fail a| Boolean | Avoid verification failure when the revocation server can not be reached or is busy. |  | 
+|======================
+
+[[CustomOcspResponder]]
+=== Custom Ocsp Responder
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Url a| String | The URL of the OCSP responder. |  | 
+| Cert Alias a| String | Alias of the signing certificate for the OCSP response (must be in the trust store), if present. |  | 
+|======================
+
+[[CrlFile]]
+=== Crl File
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The path to the CRL file. |  | 
+|======================
+
+[[ExpirationPolicy]]
+=== Expiration Policy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Max Idle Time a| Number | A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration |  | 
+| Time Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS | A time unit that qualifies the maxIdleTime attribute |  | 
+|======================
+
+[[HttpResponseAttributes]]
+=== Http Response Attributes
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Status Code a| Number |  |  | x
+| Headers a| Object |  |  | x
+| Reason Phrase a| String |  |  | x
+|======================
+
+[[RepeatableInMemoryStream]]
+=== Repeatable In Memory Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Initial Buffer Size a| Number | This is the amount of memory that will be allocated in order to consume the stream and provide random access to it. If the stream contains more data than can be fit into this buffer, then it will be expanded by according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize. |  | 
+| Buffer Size Increment a| Number | This is by how much will be buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full. |  | 
+| Max Buffer Size a| Number | This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which all these attributes are expressed |  | 
+|======================
+
+[[RepeatableFileStoreStream]]
+=== Repeatable File Store Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| In Memory Size a| Number | Defines the maximum memory that the stream should use to keep data in memory. If more than that is consumed then it will start to buffer the content on disk. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which maxInMemorySize is expressed |  | 
+|======================
+
+[[Org}root]]
+=== Org}root
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Root a| org}#AnonType_root |  |  | x
+|======================
+

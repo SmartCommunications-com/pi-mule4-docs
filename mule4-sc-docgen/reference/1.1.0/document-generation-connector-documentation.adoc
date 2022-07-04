@@ -1,0 +1,1523 @@
+
+
+= Document Generation Connector Module Connector Reference
+
+
+
+== Configurations
+---
+[[Config]]
+=== Config
+
+
+==== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+|Name | String | The name for this configuration. Connectors reference the configuration with this name. | | *x*{nbsp}
+| Connection a| * <<Config_Oauth1, SmartComm Document Generation OAuth1 Connection Provider>> {nbsp}
+* <<Config_Oauth2ClientCredentials, SmartComm Document Generation OAuth2 Client Credentials Connection Provider>> {nbsp}
+ | The connection types that can be provided to this configuration. | | *x*{nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  60 | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  SECONDS | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  AUTO | {nbsp}
+| Name a| String |  The identifier of this element used to reference it in other components |  | *x*{nbsp}
+| Expiration Policy a| <<ExpirationPolicy>> |  Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit. |  | {nbsp}
+|===
+
+==== Connection Types
+[[Config_Oauth1]]
+===== SmartComm Document Generation OAuth1 Connection Provider
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Default Headers a| Array of <<DefaultHeader>> |  |  | {nbsp}
+| Query Parameters a| Array of <<DefaultQueryParam>> |  |  | {nbsp}
+| Connection Timeout a| Number |  The timeout for establishing connections to the remote service |  30 | {nbsp}
+| Connection Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Connection Timeout |  SECONDS | {nbsp}
+| Use Persistent Connections a| Boolean |  If false, each connection will be closed after the first request is completed. |  true | {nbsp}
+| Max Connections a| Number |  The maximum number of outbound connections that will be kept open at the same time |  -1 | {nbsp}
+| Connection Idle Timeout a| Number |  A timeout for how long a connection can remain idle before it is closed |  30 | {nbsp}
+| Connection Idle Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the connection Idle Timeout |  SECONDS | {nbsp}
+| Proxy Config a| <<Proxy>> |  Reusable configuration element for outbound connections through a proxy |  | {nbsp}
+| Stream Response a| Boolean |  Whether or not received responses should be streamed |  false | {nbsp}
+| Response Buffer Size a| Number |  The space in bytes for the buffer where the HTTP response will be stored. |  -1 | {nbsp}
+| Base Uri a| String |  The base uri of the REST API being consumed |  | {nbsp}
+| User Id a| String |  The user id to authenticate the requests |  | *x*{nbsp}
+| Consumer Key a| String |  The consumer key to authenticate the requests |  | *x*{nbsp}
+| Consumer Secret a| String |  The consumer secret to authenticate the requests |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+|===
+[[Config_Oauth2ClientCredentials]]
+===== SmartComm Document Generation OAuth2 Client Credentials Connection Provider
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Default Headers a| Array of <<DefaultHeader>> |  |  | {nbsp}
+| Query Parameters a| Array of <<DefaultQueryParam>> |  |  | {nbsp}
+| Connection Timeout a| Number |  The timeout for establishing connections to the remote service |  30 | {nbsp}
+| Connection Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Connection Timeout |  SECONDS | {nbsp}
+| Use Persistent Connections a| Boolean |  If false, each connection will be closed after the first request is completed. |  true | {nbsp}
+| Max Connections a| Number |  The maximum number of outbound connections that will be kept open at the same time |  -1 | {nbsp}
+| Connection Idle Timeout a| Number |  A timeout for how long a connection can remain idle before it is closed |  30 | {nbsp}
+| Connection Idle Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the connection Idle Timeout |  SECONDS | {nbsp}
+| Proxy Config a| <<Proxy>> |  Reusable configuration element for outbound connections through a proxy |  | {nbsp}
+| Stream Response a| Boolean |  Whether or not received responses should be streamed |  false | {nbsp}
+| Response Buffer Size a| Number |  The space in bytes for the buffer where the HTTP response will be stored. |  -1 | {nbsp}
+| Base Uri a| String |  Parameter base URI, each instance/tenant gets its own |  | {nbsp}
+| Protocol a| Enumeration, one of:
+
+** HTTP
+** HTTPS |  Protocol to use for communication. Valid values are HTTP and HTTPS |  HTTP | {nbsp}
+| TLS Configuration a| <<Tls>> |  |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+| Client Id a| String |  The OAuth client id as registered with the service provider |  | *x*{nbsp}
+| Client Secret a| String |  The OAuth client secret as registered with the service provider |  | *x*{nbsp}
+| Token Url a| String |  The service provider's token endpoint URL |  /one/oauth2Server/token | {nbsp}
+| Scopes a| String |  The OAuth scopes to be requested during the dance. If not provided, it will default to those in the annotation |  | {nbsp}
+| Object Store a| String |  A reference to the object store that should be used to store each resource owner id's data. If not specified, runtime will automatically provision the default one. |  | {nbsp}
+|===
+
+==== Associated Operations
+* <<ApplyChoiceLists>> {nbsp}
+* <<ApplyMissingFields>> {nbsp}
+* <<DeleteCachedItems>> {nbsp}
+* <<FinalizeDraftNonMultiPart>> {nbsp}
+* <<GenerateDocumentNonMultiPart>> {nbsp}
+* <<GenerateDraft>> {nbsp}
+* <<GetCachedItem>> {nbsp}
+* <<GetChoiceLists>> {nbsp}
+* <<GetDocDefChannels>> {nbsp}
+* <<IsRequired>> {nbsp}
+* <<ListInterviewFields>> {nbsp}
+* <<ListMissingFields>> {nbsp}
+* <<ListSharedContentArgs>> {nbsp}
+* <<ProcessSharedContent>> {nbsp}
+* <<QueryDocDef>> {nbsp}
+* <<Unauthorize>> {nbsp}
+* <<ValidateChoiceLists>> {nbsp}
+
+
+
+== Operations
+
+[[ApplyChoiceLists]]
+== Apply Choice Lists
+`<sc-docgen:apply-choice-lists>`
+
+
+Apply an array of optional paragraphs to a Draft. Used with [Get Choice Lists] and [Validate Choice Lists] to allow selection, validation and generation of drafts that contain optional paragraphs. This operation makes an HTTP POST request to the /v11/correspondence/applyChoiceLists endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ApplyMissingFields]]
+== Apply Missing Fields
+`<sc-docgen:apply-missing-fields>`
+
+
+Used to apply values to the fields identified in [List Missing Fields]. The response contains a byte of an xml data object. This operation makes an HTTP POST request to the /v11/correspondence/applyMissingFields endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[DeleteCachedItems]]
+== Delete Cached Items
+`<sc-docgen:delete-cached-items>`
+
+
+Deletes the cached document parts associated with a document generation request This operation makes an HTTP DELETE request to the /v11/cachedItems/{uniqueId} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Unique Id a| String |  The unique job identifier contained in the 'previewKey' property of the generateDocument/Draft response |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[FinalizeDraftNonMultiPart]]
+== Finalize Draft
+`<sc-docgen:finalize-draft-non-multi-part>`
+
+
+Renders a draft document to its final format. If you generate a draft document on the cloud, you need to edit the draft document and finalize the draft document on the cloud. If you generate a draft document on an appliance, you need to edit the draft document and finalize the draft document on the appliance. When calling the API on an appliance you must ensure the user specified during authentication is from the same tenancy as the User ID set on the Configuration page of the appliance web control panel. The following properties can be used as property values in the draft request. The properties available to render a draft document are: Property nameDescriptionDefault valuemerge.pdfIf you have a PDF primary document with PDF enclosures, the enclosures are merged with the primary document to give a single PDF. This merging process does not compress the merged PDF. By default all PDF enclosures will be merged if the primary print format is PDF. Set to false to turn off merging of PDF enclosures.TRUEmerge.alwayspdfIf you have a non-PDF primary document with PDF enclosures, by default the PDF enclosures are not merged. Set to true to enable PDF enclosures to be merged when the primary print format is non-PDF. When set to true, the content in the PDF enclosures is merged.FALSEmerge.printChannelBy default non-PDF enclosures are printed separately and merging is disabled. Set to true to enable merging of non-PDF enclosures, including PostScript and AFP.FALSEmerge.taggedpdfIf you require accessible or tagged PDFs to be produced then we recommend this setting is set to true. Otherwise the merged PDF will not be properly tagged.TRUEinline-cssEmbed CSS for an HTML page into the HTML at an inline levelFALSErender-track-changesShow track changesFALSEprint.mimicformatIf print format is XML, mimic an alternate format when rendering the document"XML"preview.excludeExclude the master channel from any document mergeFALSEhtml.normalizespaceRemove indentation in the XHTMLFALSE This operation makes an HTTP POST request to the /v11/job/finalizeDraft endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Include Document Data a| Boolean |  Query parameter. Boolean flag to determine whether the document data is included in the response. Possible values are true (Stateless - recommended) or false (Stateful). If true, the document data will be included in the response. The document data returned in the response will be Base64 encoded. |  false | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GenerateDocumentNonMultiPart]]
+== Generate Document
+`<sc-docgen:generate-document-non-multi-part>`
+
+
+Generates a document. When you generate a document as HTML that includes images, you will need to implement additional code to make the images available on a cache you can access. This is because by default the document contains links to the images that are stored in an authenticated cache, so you will not see them when sent in an email. The following properties can be used as property values in the document request. The properties available to generate a document are: Property nameDescriptionDefault valuemerge.pdfIf you have a PDF primary document with PDF enclosures, the enclosures are merged with the primary document to give a single PDF. This merging process does not compress the merged PDF. By default all PDF enclosures will be merged if the primary print format is PDF. Set to false to turn off merging of PDF enclosures.TRUEmerge.alwayspdfIf you have a non-PDF primary document with PDF enclosures, by default the PDF enclosures are not merged. Set to true to enable PDF enclosures to be merged when the primary print format is non-PDF. When set to true, the content in the PDF enclosures is merged.FALSEmerge.printChannelBy default non-PDF enclosures are printed separately and merging is disabled. Set to true to enable merging of non-PDF enclosures, including PostScript and AFP.FALSEmerge.taggedpdfIf you require accessible or tagged PDFs to be produced then we recommend this setting is set to true. Otherwise the merged PDF will not be properly tagged.TRUEinline-cssEmbed CSS for an HTML page into the HTML at an inline levelFALSErender-track-changesShow track changesFALSEprint.mimicformatIf print format is XML, mimic an alternate format when rendering the document"XML"preview.excludeExclude the master channel from any document mergeFALSEjob.message.levelSets the log level for logInfo(), logWarning(), and logError() messages in scriptable batches and scriptable template selectors. The output is displayed as Job Messages returned in calls to 'Generate Document' and 'Generate Draft'. Possible values are 0 (error), 1 (warning), 2 (info).1html.normalizespaceRemove indentation in the XHTMLFALSE This operation makes an HTTP POST request to the /v11/job/generateDocument endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Include Document Data a| Boolean |  Query parameter. Boolean flag to determine whether generated document data should be provided directly. Possible values are true or false. If true, base64 data will be provided for each channel result. If false, a URL for retrieving the data will be provided for each channel result. |  false | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GenerateDraft]]
+== Generate Draft
+`<sc-docgen:generate-draft>`
+
+
+Generates a draft document. If you generate a draft document on the cloud, you need to edit the draft document and finalize the draft document on the cloud. If you generate a draft document on an appliance, you need to edit the draft document and finalize the draft document on the appliance. When calling the API on an appliance you must ensure the user specified during authentication is from the same tenancy as the User ID set on the Configuration page of the appliance web control panel. The properties available to generate a draft document are: Property nameDescriptionDefault valuerender-track-changesShow track changesFALSEjob.message.levelSets the log level for logInfo(), logWarning(), and logError() messages in scriptable batches and scriptable template selectors. The output is displayed as Job Messages returned in calls to 'Generate Document' and 'Generate Draft'. Possible values are 0 (error), 1 (warning), 2 (info).1 This operation makes an HTTP POST request to the /v11/job/generateDraft endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Include Document Data a| Boolean |  Boolean flag to determine whether the document data is included in the response. Possible values are true (Stateless - recommended) or false (Stateful). If true, the document data will be included in the response. |  false | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetCachedItem]]
+== Get Cached Item
+`<sc-docgen:get-cached-item>`
+
+
+Retrieves a part of a generated document package. The response is the document part in its native content type. For example, a PDF document part will be returned as a stream of bytes with the content type 'application/pdf'. This operation makes an HTTP GET request to the /v11/cachedItems/{uniqueId}/parts/{partId} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Unique Id a| String |  Preview key |  | *x*{nbsp}
+| Part Id a| Number |  Part Location |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetChoiceLists]]
+== Get Choice Lists
+`<sc-docgen:get-choice-lists>`
+
+
+Returns a list of the Choice List (and Choice) elements present inside a draft document. This operation makes an HTTP POST request to the /v11/correspondence/getChoiceLists endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Draft - Body a| String |  The content of the 'draft' part. |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetDocDefChannels]]
+== Get Doc Def Channels
+`<sc-docgen:get-doc-def-channels>`
+
+
+Returns a list of the channels associated with a Document Definition (Template) This operation makes an HTTP GET request to the /v11/correspondence/getTemplateChannels endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| ddid a| Number |  The resource ID of the document template |  | *x*{nbsp}
+| Project Id a| Number |  The project ID to run within project scope |  -1 | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[IsRequired]]
+== Is Required
+`<sc-docgen:is-required>`
+
+
+Enables you to establish whether or not an interview process is required before a document can be generated from input transaction data. You need to submit the details of the template you want to test, along with the transaction data you intend to use. If a resource ID and project ID are provided, the effective version of the template will be selected. The Boolean value returned indicates whether an interview is required. True: The transaction data is incomplete, therefore an interview is required to create the document. False: The transaction data is sufficiently complete, therefore no interview is required to complete the document. This operation makes an HTTP POST request to the /v11/interview/isRequired endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Boolean
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListInterviewFields]]
+== List Interview Fields
+`<sc-docgen:list-interview-fields>`
+
+
+This method enables you to establish, using the logic within an interview, any fields used within the template and shared content that have not been supplied but are required to generate a specified document. When you submit the details of the template you want to check for missing fields, the missing fields required to create the document are listed. The listing of missing fields is an iterative process. Only the minimum number of fields required to create the document are returned. However the supply of missing data can affect the document's assembly logic, potentially identifying further required fields, in which case the method is called again. The method is called iteratively as the transaction data is collated until there are no missing fields. A resource ID can be provided, also a project ID if working in project scope, and Smart Communications will select the effective version. This method will work successfully with templates that do not include an Interview Form. This operation makes an HTTP POST request to the /v11/interview/listInterviewFields endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListMissingFields]]
+== List Missing Fields
+`<sc-docgen:list-missing-fields>`
+
+
+Enables you to establish, using the logic within an interview, any fields used within the template and shared content that have not been supplied, but are required to generate a specified document. More specifically: The listmissingfields API method only checks for missing fields at the template level. Where any fields within Shared Content, or within nested Shared Content, are derived from an entire Data Model Class which has been passed as a value to the Data Model, then these fields are not checked by the method. However, if only the required Data Items, not the entire Data Model Class, are passed as values to Shared Content, then the method will check them all, since in this scenario all values are at the template level. The listmissingfields API method may not identify and return missing data properties where those properties are used in assembly logic. This operation makes an HTTP POST request to the /v11/correspondence/listMissingFields endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListSharedContentArgs]]
+== List Shared Content Args
+`<sc-docgen:list-shared-content-args>`
+
+
+Examines a piece of shared content and presents the arguments for that shared content to the user. To run the method, the Resource Version ID for a piece of shared content is submitted, then a list of the arguments found in the shared content is displayed (a message will be displayed if no arguments are found). This operation makes an HTTP GET request to the /v11/correspondence/listSharedContentArgs endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Res Ver Id a| Number |  The resource version ID of the shared content |  | *x*{nbsp}
+| Project Id a| Number |  The project ID to run within project scope. This value is not required if the specified shared content is part of a released project. |  -1 | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ProcessSharedContent]]
+== Process Shared Content
+`<sc-docgen:process-shared-content>`
+
+
+Process the shared content arguments associated with a given resource version ID. Used in conjunction with [List Shared Content Arguments] to dynamically change values used in shared content. This operation makes an HTTP POST request to the /v11/correspondence/processSharedContent endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[QueryDocDef]]
+== Query Doc Def
+`<sc-docgen:query-doc-def>`
+
+
+There are two methods for Query Document Definition (Template). The first returns a list of the document definitions associated with the specified data model resource ID. The second returns a list of the document definitions with the specified document definition resource name. If you select the document definition resource name method and leave the resource name field blank, then all of the document definitions on your system will be returned. Both Methods will only return released resources. This operation makes an HTTP POST request to the /v11/correspondence/queryTemplate endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[Unauthorize]]
+== Unauthorize
+`<sc-docgen:unauthorize>`
+
+
+Deletes all the access token information of a given resource owner id so that it's impossible to execute any operation for that user without doing the authorization dance again
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+|===
+
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+
+
+[[ValidateChoiceLists]]
+== Validate Choice Lists
+`<sc-docgen:validate-choice-lists>`
+
+
+Validates the selected choice list/choices This operation makes an HTTP POST request to the /v11/correspondence/validateChoiceLists endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Array of Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+
+== Types
+[[DefaultHeader]]
+=== Default Header
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Key a| String |  |  | x
+| Value a| String |  |  | x
+|======================
+
+[[DefaultQueryParam]]
+=== Default Query Param
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Key a| String |  |  | x
+| Value a| String |  |  | x
+|======================
+
+[[Proxy]]
+=== Proxy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Host a| String |  |  | x
+| Port a| Number |  |  | x
+| Username a| String |  |  | 
+| Password a| String |  |  | 
+| Non Proxy Hosts a| String |  |  | 
+|======================
+
+[[Reconnection]]
+=== Reconnection
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Fails Deployment a| Boolean | When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | 
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> | The reconnection strategy to use |  | 
+|======================
+
+[[Reconnect]]
+=== Reconnect
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+| Count a| Number | How many reconnection attempts to make |  | 
+|======================
+
+[[ReconnectForever]]
+=== Reconnect Forever
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+|======================
+
+[[Tls]]
+=== Tls
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Enabled Protocols a| String | A comma separated list of protocols enabled for this context. |  | 
+| Enabled Cipher Suites a| String | A comma separated list of cipher suites enabled for this context. |  | 
+| Trust Store a| <<TrustStore>> |  |  | 
+| Key Store a| <<KeyStore>> |  |  | 
+| Revocation Check a| * <<StandardRevocationCheck>>
+* <<CustomOcspResponder>>
+* <<CrlFile>> |  |  | 
+|======================
+
+[[TrustStore]]
+=== Trust Store
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The location (which will be resolved relative to the current classpath and file system, if possible) of the trust store. |  | 
+| Password a| String | The password used to protect the trust store. |  | 
+| Type a| String | The type of store used. |  | 
+| Algorithm a| String | The algorithm used by the trust store. |  | 
+| Insecure a| Boolean | If true, no certificate validations will be performed, rendering connections vulnerable to attacks. Use at your own risk. |  | 
+|======================
+
+[[KeyStore]]
+=== Key Store
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The location (which will be resolved relative to the current classpath and file system, if possible) of the key store. |  | 
+| Type a| String | The type of store used. |  | 
+| Alias a| String | When the key store contains many private keys, this attribute indicates the alias of the key that should be used. If not defined, the first key in the file will be used by default. |  | 
+| Key Password a| String | The password used to protect the private key. |  | 
+| Password a| String | The password used to protect the key store. |  | 
+| Algorithm a| String | The algorithm used by the key store. |  | 
+|======================
+
+[[StandardRevocationCheck]]
+=== Standard Revocation Check
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Only End Entities a| Boolean | Only verify the last element of the certificate chain. |  | 
+| Prefer Crls a| Boolean | Try CRL instead of OCSP first. |  | 
+| No Fallback a| Boolean | Do not use the secondary checking method (the one not selected before). |  | 
+| Soft Fail a| Boolean | Avoid verification failure when the revocation server can not be reached or is busy. |  | 
+|======================
+
+[[CustomOcspResponder]]
+=== Custom Ocsp Responder
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Url a| String | The URL of the OCSP responder. |  | 
+| Cert Alias a| String | Alias of the signing certificate for the OCSP response (must be in the trust store), if present. |  | 
+|======================
+
+[[CrlFile]]
+=== Crl File
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The path to the CRL file. |  | 
+|======================
+
+[[ExpirationPolicy]]
+=== Expiration Policy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Max Idle Time a| Number | A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration |  | 
+| Time Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS | A time unit that qualifies the maxIdleTime attribute |  | 
+|======================
+
+[[HttpResponseAttributes]]
+=== Http Response Attributes
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Status Code a| Number |  |  | x
+| Headers a| Object |  |  | x
+| Reason Phrase a| String |  |  | x
+|======================
+
+[[RepeatableInMemoryStream]]
+=== Repeatable In Memory Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Initial Buffer Size a| Number | This is the amount of memory that will be allocated in order to consume the stream and provide random access to it. If the stream contains more data than can be fit into this buffer, then it will be expanded by according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize. |  | 
+| Buffer Size Increment a| Number | This is by how much will be buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full. |  | 
+| Max Buffer Size a| Number | This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which all these attributes are expressed |  | 
+|======================
+
+[[RepeatableFileStoreStream]]
+=== Repeatable File Store Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| In Memory Size a| Number | Defines the maximum memory that the stream should use to keep data in memory. If more than that is consumed then it will start to buffer the content on disk. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which maxInMemorySize is expressed |  | 
+|======================
+

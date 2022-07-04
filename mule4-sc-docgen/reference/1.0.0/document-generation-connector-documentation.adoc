@@ -1,0 +1,436 @@
+
+
+= Document Generation Connector Module Connector Reference
+
+
+
+== Configurations
+---
+[[Config]]
+=== Config
+
+
+==== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+|Name | String | The name for this configuration. Connectors reference the configuration with this name. | | *x*{nbsp}
+| Connection a| <<Config_Oauth1, SmartComm OAuth1 Connection Provider>>
+ | The connection types that can be provided to this configuration. | | *x*{nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  60 | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  SECONDS | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  AUTO | {nbsp}
+| Name a| String |  The identifier of this element used to reference it in other components |  | *x*{nbsp}
+| Expiration Policy a| <<ExpirationPolicy>> |  Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit. |  | {nbsp}
+|===
+
+==== Connection Types
+[[Config_Oauth1]]
+===== SmartComm OAuth1 Connection Provider
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Default Headers a| Array of <<DefaultHeader>> |  |  | {nbsp}
+| Query Parameters a| Array of <<DefaultQueryParam>> |  |  | {nbsp}
+| Connection Timeout a| Number |  The timeout for establishing connections to the remote service |  30 | {nbsp}
+| Connection Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Connection Timeout |  SECONDS | {nbsp}
+| Use Persistent Connections a| Boolean |  If false, each connection will be closed after the first request is completed. |  true | {nbsp}
+| Max Connections a| Number |  The maximum number of outbound connections that will be kept open at the same time |  -1 | {nbsp}
+| Connection Idle Timeout a| Number |  A timeout for how long a connection can remain idle before it is closed |  30 | {nbsp}
+| Connection Idle Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the connection Idle Timeout |  SECONDS | {nbsp}
+| Proxy Config a| <<Proxy>> |  Reusable configuration element for outbound connections through a proxy |  | {nbsp}
+| Stream Response a| Boolean |  Whether or not received responses should be streamed |  false | {nbsp}
+| Response Buffer Size a| Number |  The space in bytes for the buffer where the HTTP response will be stored. |  -1 | {nbsp}
+| Base Uri a| String |  The base uri of the REST API being consumed |  | {nbsp}
+| User Id a| String |  The user id to authenticate the requests |  | *x*{nbsp}
+| Consumer Key a| String |  The consumer key to authenticate the requests |  | *x*{nbsp}
+| Consumer Secret a| String |  The consumer secret to authenticate the requests |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+|===
+
+==== Associated Operations
+* <<FinalizeDraftNonMultiPart>> {nbsp}
+* <<GenerateDocumentNonMultiPart>> {nbsp}
+* <<GenerateDraft>> {nbsp}
+
+
+
+== Operations
+
+[[FinalizeDraftNonMultiPart]]
+== Finalize Draft
+`<sc-docgen:finalize-draft-non-multi-part>`
+
+
+Renders a draft document to its final format. If you generate a draft document on the cloud, you need to edit the draft document and finalize the draft document on the cloud. If you generate a draft document on an appliance, you need to edit the draft document and finalize the draft document on the appliance. When calling the API on an appliance you must ensure the user specified during authentication is from the same tenancy as the User ID set on the Configuration page of the appliance web control panel. The following properties can be used as property values in the draft request. The properties available to render a draft document are: Property nameDescriptionDefault valuemerge.pdfIf you have a PDF primary document with PDF enclosures, the enclosures are merged with the primary document to give a single PDF. This merging process does not compress the merged PDF. By default all PDF enclosures will be merged if the primary print format is PDF. Set to false to turn off merging of PDF enclosures.TRUEmerge.alwayspdfIf you have a non-PDF primary document with PDF enclosures, by default the PDF enclosures are not merged. Set to true to enable PDF enclosures to be merged when the primary print format is non-PDF. When set to true, the content in the PDF enclosures is merged.FALSEmerge.printChannelBy default non-PDF enclosures are printed separately and merging is disabled. Set to true to enable merging of non-PDF enclosures, including PostScript and AFP.FALSEmerge.taggedpdfIf you require accessible or tagged PDFs to be produced then we recommend this setting is set to true. Otherwise the merged PDF will not be properly tagged.TRUEinline-cssEmbed CSS for an HTML page into the HTML at an inline levelFALSErender-track-changesShow track changesFALSEprint.mimicformatIf print format is XML, mimic an alternate format when rendering the document"XML"preview.excludeExclude the master channel from any document mergeFALSEhtml.normalizespaceRemove indentation in the XHTMLFALSE This operation makes an HTTP POST request to the /v10/job/finalizeDraft endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Include Document Data a| Boolean |  Query parameter. Boolean flag to determine whether the document data is included in the response. Possible values are true (Stateless - recommended) or false (Stateful). If true, the document data will be included in the response. The document data returned in the response will be Base64 encoded. |  false | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GenerateDocumentNonMultiPart]]
+== Generate Document
+`<sc-docgen:generate-document-non-multi-part>`
+
+
+Generates a document. When you generate a document as HTML that includes images, you will need to implement additional code to make the images available on a cache you can access. This is because by default the document contains links to the images that are stored in an authenticated cache, so you will not see them when sent in an email. The following properties can be used as property values in the document request. The properties available to generate a document are: Property nameDescriptionDefault valuemerge.pdfIf you have a PDF primary document with PDF enclosures, the enclosures are merged with the primary document to give a single PDF. This merging process does not compress the merged PDF. By default all PDF enclosures will be merged if the primary print format is PDF. Set to false to turn off merging of PDF enclosures.TRUEmerge.alwayspdfIf you have a non-PDF primary document with PDF enclosures, by default the PDF enclosures are not merged. Set to true to enable PDF enclosures to be merged when the primary print format is non-PDF. When set to true, the content in the PDF enclosures is merged.FALSEmerge.printChannelBy default non-PDF enclosures are printed separately and merging is disabled. Set to true to enable merging of non-PDF enclosures, including PostScript and AFP.FALSEmerge.taggedpdfIf you require accessible or tagged PDFs to be produced then we recommend this setting is set to true. Otherwise the merged PDF will not be properly tagged.TRUEinline-cssEmbed CSS for an HTML page into the HTML at an inline levelFALSErender-track-changesShow track changesFALSEprint.mimicformatIf print format is XML, mimic an alternate format when rendering the document"XML"preview.excludeExclude the master channel from any document mergeFALSEjob.message.levelSets the log level for logInfo(), logWarning(), and logError() messages in scriptable batches and scriptable template selectors. The output is displayed as Job Messages returned in calls to 'Generate Document' and 'Generate Draft'. Possible values are 0 (error), 1 (warning), 2 (info).1html.normalizespaceRemove indentation in the XHTMLFALSE This operation makes an HTTP POST request to the /v10/job/generateDocument endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Include Document Data a| Boolean |  Query parameter. Boolean flag to determine whether generated document data should be provided directly. Possible values are true or false. If true, base64 data will be provided for each channel result. If false, a URL for retrieving the data will be provided for each channel result. |  false | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GenerateDraft]]
+== Generate Draft
+`<sc-docgen:generate-draft>`
+
+
+Generates a draft document. If you generate a draft document on the cloud, you need to edit the draft document and finalize the draft document on the cloud. If you generate a draft document on an appliance, you need to edit the draft document and finalize the draft document on the appliance. When calling the API on an appliance you must ensure the user specified during authentication is from the same tenancy as the User ID set on the Configuration page of the appliance web control panel. The properties available to generate a draft document are: Property nameDescriptionDefault valuerender-track-changesShow track changesFALSEjob.message.levelSets the log level for logInfo(), logWarning(), and logError() messages in scriptable batches and scriptable template selectors. The output is displayed as Job Messages returned in calls to 'Generate Document' and 'Generate Draft'. Possible values are 0 (error), 1 (warning), 2 (info).1 This operation makes an HTTP POST request to the /v10/job/generateDraft endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Include Document Data a| Boolean |  Boolean flag to determine whether the document data is included in the response. Possible values are true (Stateless - recommended) or false (Stateful). If true, the document data will be included in the response. |  false | {nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-DOCGEN:BAD_REQUEST {nbsp}
+* SC-DOCGEN:CLIENT_ERROR {nbsp}
+* SC-DOCGEN:CONNECTIVITY {nbsp}
+* SC-DOCGEN:INTERNAL_SERVER_ERROR {nbsp}
+* SC-DOCGEN:NOT_ACCEPTABLE {nbsp}
+* SC-DOCGEN:NOT_FOUND {nbsp}
+* SC-DOCGEN:RETRY_EXHAUSTED {nbsp}
+* SC-DOCGEN:SERVER_ERROR {nbsp}
+* SC-DOCGEN:SERVICE_UNAVAILABLE {nbsp}
+* SC-DOCGEN:TIMEOUT {nbsp}
+* SC-DOCGEN:TOO_MANY_REQUESTS {nbsp}
+* SC-DOCGEN:UNAUTHORIZED {nbsp}
+* SC-DOCGEN:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+
+== Types
+[[DefaultHeader]]
+=== Default Header
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Key a| String |  |  | x
+| Value a| String |  |  | x
+|======================
+
+[[DefaultQueryParam]]
+=== Default Query Param
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Key a| String |  |  | x
+| Value a| String |  |  | x
+|======================
+
+[[Proxy]]
+=== Proxy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Host a| String |  |  | x
+| Port a| Number |  |  | x
+| Username a| String |  |  | 
+| Password a| String |  |  | 
+| Non Proxy Hosts a| String |  |  | 
+|======================
+
+[[Reconnection]]
+=== Reconnection
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Fails Deployment a| Boolean | When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | 
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> | The reconnection strategy to use |  | 
+|======================
+
+[[Reconnect]]
+=== Reconnect
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+| Count a| Number | How many reconnection attempts to make |  | 
+|======================
+
+[[ReconnectForever]]
+=== Reconnect Forever
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+|======================
+
+[[ExpirationPolicy]]
+=== Expiration Policy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Max Idle Time a| Number | A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration |  | 
+| Time Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS | A time unit that qualifies the maxIdleTime attribute |  | 
+|======================
+
+[[HttpResponseAttributes]]
+=== Http Response Attributes
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Status Code a| Number |  |  | x
+| Headers a| Object |  |  | x
+| Reason Phrase a| String |  |  | x
+|======================
+
+[[RepeatableInMemoryStream]]
+=== Repeatable In Memory Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Initial Buffer Size a| Number | This is the amount of memory that will be allocated in order to consume the stream and provide random access to it. If the stream contains more data than can be fit into this buffer, then it will be expanded by according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize. |  | 
+| Buffer Size Increment a| Number | This is by how much will be buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full. |  | 
+| Max Buffer Size a| Number | This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which all these attributes are expressed |  | 
+|======================
+
+[[RepeatableFileStoreStream]]
+=== Repeatable File Store Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| In Memory Size a| Number | Defines the maximum memory that the stream should use to keep data in memory. If more than that is consumed then it will start to buffer the content on disk. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which maxInMemorySize is expressed |  | 
+|======================
+

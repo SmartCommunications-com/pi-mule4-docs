@@ -1,0 +1,1886 @@
+
+
+= Bulk Connector Module Connector Reference
+
+
+
+== Configurations
+---
+[[Config]]
+=== Config
+
+
+==== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+|Name | String | The name for this configuration. Connectors reference the configuration with this name. | | *x*{nbsp}
+| Connection a| * <<Config_Oauth1, SmartComm Bulk OAuth1 Connection Provider>> {nbsp}
+* <<Config_Oauth2ClientCredentials, SmartComm Bulk OAuth2 Client Credentials Connection Provider>> {nbsp}
+ | The connection types that can be provided to this configuration. | | *x*{nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  60 | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  SECONDS | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  AUTO | {nbsp}
+| Name a| String |  The identifier of this element used to reference it in other components |  | *x*{nbsp}
+| Expiration Policy a| <<ExpirationPolicy>> |  Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit. |  | {nbsp}
+|===
+
+==== Connection Types
+[[Config_Oauth1]]
+===== SmartComm Bulk OAuth1 Connection Provider
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Default Headers a| Array of <<DefaultHeader>> |  |  | {nbsp}
+| Query Parameters a| Array of <<DefaultQueryParam>> |  |  | {nbsp}
+| Connection Timeout a| Number |  The timeout for establishing connections to the remote service |  30 | {nbsp}
+| Connection Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Connection Timeout |  SECONDS | {nbsp}
+| Use Persistent Connections a| Boolean |  If false, each connection will be closed after the first request is completed. |  true | {nbsp}
+| Max Connections a| Number |  The maximum number of outbound connections that will be kept open at the same time |  -1 | {nbsp}
+| Connection Idle Timeout a| Number |  A timeout for how long a connection can remain idle before it is closed |  30 | {nbsp}
+| Connection Idle Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the connection Idle Timeout |  SECONDS | {nbsp}
+| Proxy Config a| <<Proxy>> |  Reusable configuration element for outbound connections through a proxy |  | {nbsp}
+| Stream Response a| Boolean |  Whether or not received responses should be streamed |  false | {nbsp}
+| Response Buffer Size a| Number |  The space in bytes for the buffer where the HTTP response will be stored. |  -1 | {nbsp}
+| Base URI a| String |  The base uri of the REST API being consumed |  | {nbsp}
+| User Id a| String |  The user id to authenticate the requests |  | *x*{nbsp}
+| Consumer Key a| String |  The consumer key to authenticate the requests |  | *x*{nbsp}
+| Consumer Secret a| String |  The consumer secret to authenticate the requests |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+|===
+[[Config_Oauth2ClientCredentials]]
+===== SmartComm Bulk OAuth2 Client Credentials Connection Provider
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Default Headers a| Array of <<DefaultHeader>> |  |  | {nbsp}
+| Query Parameters a| Array of <<DefaultQueryParam>> |  |  | {nbsp}
+| Connection Timeout a| Number |  The timeout for establishing connections to the remote service |  30 | {nbsp}
+| Connection Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Connection Timeout |  SECONDS | {nbsp}
+| Use Persistent Connections a| Boolean |  If false, each connection will be closed after the first request is completed. |  true | {nbsp}
+| Max Connections a| Number |  The maximum number of outbound connections that will be kept open at the same time |  -1 | {nbsp}
+| Connection Idle Timeout a| Number |  A timeout for how long a connection can remain idle before it is closed |  30 | {nbsp}
+| Connection Idle Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the connection Idle Timeout |  SECONDS | {nbsp}
+| Proxy Config a| <<Proxy>> |  Reusable configuration element for outbound connections through a proxy |  | {nbsp}
+| Stream Response a| Boolean |  Whether or not received responses should be streamed |  false | {nbsp}
+| Response Buffer Size a| Number |  The space in bytes for the buffer where the HTTP response will be stored. |  -1 | {nbsp}
+| Base URI a| String |  Parameter base URI, each instance/tenant gets its own |  | {nbsp}
+| Protocol a| Enumeration, one of:
+
+** HTTP
+** HTTPS |  Protocol to use for communication. Valid values are HTTP and HTTPS |  HTTP | {nbsp}
+| TLS Configuration a| <<Tls>> |  |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+| Client Id a| String |  The OAuth client id as registered with the service provider |  | *x*{nbsp}
+| Client Secret a| String |  The OAuth client secret as registered with the service provider |  | *x*{nbsp}
+| Token Url a| String |  The service provider's token endpoint URL |  /one/oauth2Server/token | {nbsp}
+| Scopes a| String |  The OAuth scopes to be requested during the dance. If not provided, it will default to those in the annotation |  | {nbsp}
+| Object Store a| String |  A reference to the object store that should be used to store each resource owner id's data. If not specified, runtime will automatically provision the default one. |  | {nbsp}
+|===
+
+==== Associated Operations
+* <<CreateBundle>> {nbsp}
+* <<GetApplianceStatus>> {nbsp}
+* <<GetBundle>> {nbsp}
+* <<GetBundles>> {nbsp}
+* <<GetBundlesCount>> {nbsp}
+* <<GetFileContent>> {nbsp}
+* <<GetJob>> {nbsp}
+* <<GetJobSpoolsAndBundles>> {nbsp}
+* <<GetSpool>> {nbsp}
+* <<GetSpools>> {nbsp}
+* <<InvalidateResourceCache>> {nbsp}
+* <<JobStop>> {nbsp}
+* <<ListAppliances>> {nbsp}
+* <<ListEngineVersions>> {nbsp}
+* <<ListJobs>> {nbsp}
+* <<ListQueues>> {nbsp}
+* <<PauseAppliance>> {nbsp}
+* <<PurgeSpool>> {nbsp}
+* <<PurgeSpools>> {nbsp}
+* <<ResumeAppliance>> {nbsp}
+* <<SubmitJob>> {nbsp}
+* <<Unauthorize>> {nbsp}
+
+
+
+== Operations
+
+[[CreateBundle]]
+== Create Bundle
+`<sc-bulk:create-bundle>`
+
+
+Creates a bundle by closing the specified spool This operation makes an HTTP POST request to the /api/v7/spools/{spoolName}/createBundle endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Spool Name a| String |  The name of the spool |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetApplianceStatus]]
+== Get Appliance Status
+`<sc-bulk:get-appliance-status>`
+
+
+Returns the status of an appliance, can be one of AVAILABLE - The appliance is available PAUSING - The appliance is pausing PAUSED - The appliance is paused UNRESPONSIVESPOOLMGR - The Spool Manager component on the appliance is unresponsive Only users with the Operations Administrator, Operations Manager, or Operations Controller roles will be able to use this method (roles can be assigned to users in Settings). This operation makes an HTTP GET request to the /api/v7/appliances/{applianceName}/status endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Appliance Name a| String |  The full name of the appliance, as shown on the Appliance List screen |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetBundle]]
+== Get Bundle
+`<sc-bulk:get-bundle>`
+
+
+Retrieves a bundle's details and optionally any associated bins This operation makes an HTTP GET request to the /api/v7/spools/{spoolName}/bundles/{id} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Spool Name a| String |  The spool name |  | *x*{nbsp}
+| id a| Number |  The bundle ID |  | *x*{nbsp}
+| With Bins a| Boolean |  Optional query parameter. If set will return associated bins |  false | {nbsp}
+| from a| Number |  Optional query parameter. Specifies the index of the first bin |  | {nbsp}
+| size a| Number |  Optional query parameter. Sets the number of bins to return |  | {nbsp}
+| Order By a| String |  Optional query parameter. Sets the order of the returned bins |  | {nbsp}
+| sort a| String |  Optional query parameter. Returns bins with order DESC or ASC |  | {nbsp}
+| status a| Array of String |  Optional query parameter. Returns bins with this status or statuses |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetBundles]]
+== Get Bundles
+`<sc-bulk:get-bundles>`
+
+
+Retrieves list of Bundles created for a Spool This operation makes an HTTP GET request to the /api/v7/spools/{spoolName}/bundles endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Spool Name a| String |  The spool name |  | *x*{nbsp}
+| from a| Number |  Specifies the index of the first bundle |  | {nbsp}
+| size a| Number |  Sets the number of bundle to return |  | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetBundlesCount]]
+== Get Bundles Count
+`<sc-bulk:get-bundles-count>`
+
+
+Retrieves total number of Bundles created for a Spool This operation makes an HTTP GET request to the /api/v7/spools/{spoolName}/bundles/count endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Spool Name a| String |  The spool name |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetFileContent]]
+== Get File Content
+`<sc-bulk:get-file-content>`
+
+
+Returns the content of the requested job file. This API is NOT available on Pure Cloud because files are hosted on S3. This operation makes an HTTP GET request to the /api/v7/jobs/{jobID}/files/{jobFileID}/content endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Job ID a| Number |  The ID of the job |  | *x*{nbsp}
+| Job File ID a| Number |  The ID of the job file. Available in the response of the Job Detail method. |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetJob]]
+== Get Job
+`<sc-bulk:get-job>`
+
+
+Returns the details of a job This operation makes an HTTP GET request to the /api/v7/jobs/{jobID} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Job ID a| Number |  The ID of the job |  | *x*{nbsp}
+| Include Job Files a| Boolean |  Boolean flag to indicate whether to include job files |  false | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetJobSpoolsAndBundles]]
+== Get Job Spools And Bundles
+`<sc-bulk:get-job-spools-and-bundles>`
+
+
+Returns the spools and bundles of a job This operation makes an HTTP GET request to the /api/v7/jobs/{jobID}/spoolsAndBundles endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Job ID a| Number |  The ID of the job |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetSpool]]
+== Get Spool
+`<sc-bulk:get-spool>`
+
+
+Returns the details of a spool This operation makes an HTTP GET request to the /api/v7/spools/{spoolName} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Spool Name a| String |  The name of the spool |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[GetSpools]]
+== Get Spools
+`<sc-bulk:get-spools>`
+
+
+Returns a paged list of spools that are currently active in the system. Also returns the total number of spools in the system This operation makes an HTTP GET request to the /api/v7/spools endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| from a| Number |  The start position |  | *x*{nbsp}
+| size a| Number |  The number of results to return for this page |  | *x*{nbsp}
+| Order By a| Enumeration, one of:
+
+** SPOOLNAME
+** ENVELOPECOUNT
+** LASTACTIVITYTIME |  The attribute to sort by |  | *x*{nbsp}
+| sort a| Enumeration, one of:
+
+** ASC
+** DESC |  The sort order, ascending or descending |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[InvalidateResourceCache]]
+== Invalidate Resource Cache
+`<sc-bulk:invalidate-resource-cache>`
+
+
+Marks the mutable cache as ready to be cleared This operation makes an HTTP POST request to the /api/v7/system/invalidateCache endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[JobStop]]
+== Job Stop
+`<sc-bulk:job-stop>`
+
+
+Stops a job This operation makes an HTTP POST request to the /api/v7/jobs/{jobID}/stop endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Job ID a| Number |  The ID of the job to stop |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListAppliances]]
+== List Appliances
+`<sc-bulk:list-appliances>`
+
+
+Returns a list of all appliances registered to a tenancy. This operation makes an HTTP GET request to the /api/v7/appliances endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListEngineVersions]]
+== List Engine Versions
+`<sc-bulk:list-engine-versions>`
+
+
+Returns a list of supported engine versions in the system This operation makes an HTTP GET request to the /api/v7/engineVersions endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListJobs]]
+== List Jobs
+`<sc-bulk:list-jobs>`
+
+
+Returns the jobs in the system, matching any criteria which have been specified. If size is not specified, 50 rows will be returned by default. The maximum number of results that can be returned per page is 500. Available Job Type options: Type of JobDescriptionTransaction FileUsed to process a single input data file. This file was in the location set in the 'input' property, or the transaction data was provided inline in the 'inputData' property.Draft FileUsed when submitting one draft file as one job. This can be either a portable or a standard non-portable draft. The draft file was in the file location or URL set in the 'input' property, or provided as inline draft content in the 'inputData' property.Draft FolderUsed to submit more than one draft file as one job (collate multiple drafts into one document). It can include both portable and standard non-portable drafts. These draft files were in the location set in the 'input' property.Transaction FolderUsed to submit more than one input XML data file as one job (collate multiple transactions into one file). These XML files were in the location set in the 'input' property. Potential values of Job Status property are: QUEUED - Waiting RUNNING - In Progress SPOOLED - Spooled FINISHED - Completed STOPPING - Stopping STOPPED - Stopped FAILED - Error FINISHED_W_WORKFLOW - Completed with Draft Exceptions This operation makes an HTTP GET request to the /api/v7/jobs endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| From Date a| String |  Optional query parameter. If set will return jobs submitted from this date. Expected format: yyyy-MM-dd'T'HH:mm:ssZ Example: 2021-03-15T10:20:25Z |  | {nbsp}
+| To Date a| String |  Optional query parameter. If set will return jobs submitted to this date. Expected format: yyyy-MM-dd'T'HH:mm:ssZ Example: 2021-03-15T11:20:30Z |  | {nbsp}
+| status a| Array of String |  Optional query parameter. If set will return jobs with this status |  | {nbsp}
+| queue a| String |  Optional query parameter. If set will return jobs with this queue |  | {nbsp}
+| name a| String |  Optional query parameter. If set will return jobs with this name |  | {nbsp}
+| Job ID a| Number |  Optional query parameter. If set will return jobs with this jobID |  | {nbsp}
+| from a| Number |  Optional query parameter. If set will return jobs from this row |  0 | {nbsp}
+| size a| Number |  Optional query parameter. If set will return number of results specified. Default is 50 |  | {nbsp}
+| Order By a| String |  Optional query parameter. If set will return jobs ordered by the specified criteria. Default is JOBID |  JOBID | {nbsp}
+| sort a| String |  Optional query parameter. If set will sort by the specified sort mode |  DESC | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ListQueues]]
+== List Queues
+`<sc-bulk:list-queues>`
+
+
+Returns a list of queues in the system This operation makes an HTTP GET request to the /api/v7/queues endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Array of Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PauseAppliance]]
+== Pause Appliance
+`<sc-bulk:pause-appliance>`
+
+
+Sends a pause request to the specified appliance. Only users with the Operations Administrator, Operations Manager, or Operations Controller roles will be able to use this method (roles can be assigned to users in Settings). This operation makes an HTTP POST request to the /api/v7/appliances/{applianceName}/pause endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Appliance Name a| String |  The full name of the appliance, as shown on the Appliance List screen |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PurgeSpool]]
+== Purge Spool
+`<sc-bulk:purge-spool>`
+
+
+Deletes all bundles and bins for a spool (and deletes the spool itself if there are no remaining bundles after purging) This operation makes an HTTP DELETE request to the /api/v7/spools/{spoolName} endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Spool Name a| String |  The name of the spool |  | *x*{nbsp}
+| Purge Days a| Number |  The age (in days) of the bundles and bins to purge |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[PurgeSpools]]
+== Purge Spools
+`<sc-bulk:purge-spools>`
+
+
+Deletes all bundles and bins for all spools (and deletes the spools if there are no remaining bundles after purging) This operation makes an HTTP DELETE request to the /api/v7/spools endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Purge Days a| Number |  The age (in days) of the bundles and bins to purge |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Streaming Strategy a| * <<RepeatableInMemoryStream>>
+* <<RepeatableFileStoreStream>>
+* non-repeatable-stream |  Configure if repeatable streams should be used and their behaviour |  | {nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| Any
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[ResumeAppliance]]
+== Resume Appliance
+`<sc-bulk:resume-appliance>`
+
+
+Sends a resume request to the specified appliance. Only users with the Operations Administrator, Operations Manager, or Operations Controller roles will be able to use this method (roles can be assigned to users in Settings). This operation makes an HTTP POST request to the /api/v7/appliances/{applianceName}/resume endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Appliance Name a| String |  The full name of the appliance, as shown on the Appliance List screen |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  #[null] | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[SubmitJob]]
+== Submit Job
+`<sc-bulk:submit-job>`
+
+
+Submits a job for processing. Available Job Type options: Type of JobDescriptionTransaction FileUsed to process a single input data file. This file must be in the location set in the 'input' property, or the transaction data must be provided inline in the 'inputData' property.Draft FileUsed when you want to submit one draft file as one job. You can submit either portable or standard non-portable drafts. You can provide either a valid file location or URL in the 'input' property. Or provide inline draft content in the 'inputData' property. When DRAFT_FILE is selected, no 'config' property (template selector) is required.Draft FolderUsed when you want to submit more than one draft file as one job (collate multiple drafts into one job). You can include both portable and standard non-portable drafts. These draft files must be in the location set in the 'input' property, and must be valid .DRAFT files (the file extension is not case sensitive). The order that the draft files are processed is based on the file's date modified - the oldest file in the folder is processed first. When DRAFT_FOLDER is selected, no 'config' property (template selector) is required. When the job starts running on a hybrid appliance, the job ID is appended to the name of the draft files in the input folder so they aren't processed again (only new files will be processed in the next job). Files are not renamed in S3 buckets (or other cloud storage) when using the Pure Cloud AWS platform.Transaction FolderUsed when you want to submit more than one input XML data file as one job (collate multiple transactions into one file). These XML files must be in the location set in the 'input' property. Input XML data files must be valid .XML files and must contain data (the file extension is not case sensitive). The order that the input XML data files are processed is based on the file's date modified - the oldest file in the folder is processed first. When the job starts running on a hybrid appliance, the job ID is appended to the name of the XML files in the input folder so they aren't processed again (only new files will be processed in the next job). Files are not renamed in S3 buckets (or other cloud storage) when using the Pure Cloud AWS platform. This property is optional. If not specified, the job type will be set to TRANSACTION_FILE. The following properties can be used to define the tests run for a job when using Validate: PropertyDescriptionsc.test.descriptionType a brief description of the test. Optionalsc.test.assertion.expectedJobStatusThe expected final status of the job.For example: FINISHED (Completed)FAILED (Error)FINISHED_W_WORKFLOW (Completed with Draft Exceptions)This job property identifies a job as a test job. If this property is missing, the job will be processed like a regular bulk job.sc.test.assertion.compare.baselineThe job ID whose output you want to use as the basis for comparison. Any test job can be used as a baseline.For example: sc.test.assertion.compare.baseline= &lt;baseline job ID&gt;The baseline job output needs to be available at &lt;testoutput&gt;/testruns/&lt;baseline job ID&gt;. If this folder has been deleted, then the test will error, and the job diagnostics log will contain the information that the baseline directory is missing. If set, one or both of sc.test.assertion.compare.intermediate and sc.test.assertion.compare.final need to be set. If not set, the output of this job is not compared. Optional.sc.test.assertion.compare.intermediateDefines if the final output documents are compared.Possible values: sc.test.assertion.compare.final=truesc.test.assertion.compare.final=falseIf the final output documents are compared, the &lt;testoutput&gt;/testruns/&lt;baseline job ID&gt;/final/envelope folder is compared with the &lt;testoutput&gt;/testruns/&lt;current job ID&gt;/final/envelope folder and the sc.test.assertion.compare.finalDefines if the final output documents are compared.Possible values: sc.test.assertion.compare.final=truesc.test.assertion.compare.final=falseIf the final output documents are compared, the &lt;testoutput&gt;/testruns/&lt;baseline job ID&gt;/final/envelope folder is compared with the &lt;testoutput&gt;/testruns/&lt;current job ID&gt;/final/envelope folder and the &lt;testoutput&gt;/testruns/&lt;baseline job ID&gt;/final/bin folder is compared with the &lt;testoutput&gt;/testruns/&lt;current job ID&gt;/final/bin folder.Any additions/changes/deletions to files are reported in the final comparison report. Optional.sc.test.exclusion.pageSpecifies the Bin output pages that should be excluded from final comparison. Type a comma-separated list of page ranges, single page numbers, and keywords. For example: FIRSTLASTLAST-189-12FIRST,2-5,LAST-1,LASTOptional.sc.test.exclusion.dataSpecify the data items that should be excluded from intermediate comparisons. This can be used to exclude items that you know will change such as date/time, or customer's first name. This does not apply to final comparisons. Type a comma-separated list of system data items and business data items.System data items: getSystemVariables.getCurrentDategetSystemVariables.getVersiongetSystemVariables.isProductiongetJobVariables.getBatchIdgetJobVariables.getTransactionNogetJobVariables.getEffectiveDategetJobVariables.getIdiomgetJobVariables.getIdiomNamegetJobVariables.getLanguagegetJobVariables.getLanguageNamegetJobVariables.getJurisdictiongetJobVariables.getJurisdictionNamegetResourceVariables.getResourceIdgetResourceVariables.getResourceVersionIdgetResourceVariables.getNamegetResourceVariables.getVersiongetResourceVariables.getFullPathgetResourceVariables.getDescriptiongetResourceVariables.getEffectiveDateFromgetResourceVariables.isReleasedgetSystemVariables.getNamegetResourceVariables.effectiveDateToBusiness data items: customer.customername.firstnamecustomer.transactions.lineitem[].description Config Data size must be less than 1 MB Input Data size must be less than 10 MB Range is used to limit the number of transactions from the input data that you process in this job. Note that if you specify a range, this is a subset of every transaction in every file in a folder (for TRANSACTION_FOLDER). For example, if a folder contains 10 files each with 10 transactions, the maximum number of transactions is 100. So if you specify a range of 10, this will limit the job to the transactions in the first file only. If not specified, all transactions are used. This operation makes an HTTP POST request to the /api/v7/jobs endpoint
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Body a| Any |  the content to use |  #[payload] | {nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Custom Query Parameters a| Object |  |  | {nbsp}
+| Custom Headers a| Object |  |  | {nbsp}
+| Response Timeout a| Number |  The timeout for request to the remote service. |  | {nbsp}
+| Response Timeout Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS |  A time unit which qualifies the Response Timeout} |  | {nbsp}
+| Streaming Type a| Enumeration, one of:
+
+** AUTO
+** ALWAYS
+** NEVER |  Defines if the request should be sent using streaming. Setting the value to AUTO will automatically define the best strategy based on the request content. |  | {nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| String
+| *Attributes Type* a| <<HttpResponseAttributes>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* SC-BULK:BAD_REQUEST {nbsp}
+* SC-BULK:CLIENT_ERROR {nbsp}
+* SC-BULK:CONNECTIVITY {nbsp}
+* SC-BULK:INTERNAL_SERVER_ERROR {nbsp}
+* SC-BULK:NOT_ACCEPTABLE {nbsp}
+* SC-BULK:NOT_FOUND {nbsp}
+* SC-BULK:RETRY_EXHAUSTED {nbsp}
+* SC-BULK:SERVER_ERROR {nbsp}
+* SC-BULK:SERVICE_UNAVAILABLE {nbsp}
+* SC-BULK:TIMEOUT {nbsp}
+* SC-BULK:TOO_MANY_REQUESTS {nbsp}
+* SC-BULK:UNAUTHORIZED {nbsp}
+* SC-BULK:UNSUPPORTED_MEDIA_TYPE {nbsp}
+
+
+[[Unauthorize]]
+== Unauthorize
+`<sc-bulk:unauthorize>`
+
+
+Deletes all the access token information of a given resource owner id so that it's impossible to execute any operation for that user without doing the authorization dance again
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+|===
+
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+
+
+
+== Types
+[[DefaultHeader]]
+=== Default Header
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Key a| String |  |  | x
+| Value a| String |  |  | x
+|======================
+
+[[DefaultQueryParam]]
+=== Default Query Param
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Key a| String |  |  | x
+| Value a| String |  |  | x
+|======================
+
+[[Proxy]]
+=== Proxy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Host a| String |  |  | x
+| Port a| Number |  |  | x
+| Username a| String |  |  | 
+| Password a| String |  |  | 
+| Non Proxy Hosts a| String |  |  | 
+|======================
+
+[[Reconnection]]
+=== Reconnection
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Fails Deployment a| Boolean | When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | 
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> | The reconnection strategy to use |  | 
+|======================
+
+[[Reconnect]]
+=== Reconnect
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+| Count a| Number | How many reconnection attempts to make |  | 
+|======================
+
+[[ReconnectForever]]
+=== Reconnect Forever
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+|======================
+
+[[Tls]]
+=== Tls
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Enabled Protocols a| String | A comma separated list of protocols enabled for this context. |  | 
+| Enabled Cipher Suites a| String | A comma separated list of cipher suites enabled for this context. |  | 
+| Trust Store a| <<TrustStore>> |  |  | 
+| Key Store a| <<KeyStore>> |  |  | 
+| Revocation Check a| * <<StandardRevocationCheck>>
+* <<CustomOcspResponder>>
+* <<CrlFile>> |  |  | 
+|======================
+
+[[TrustStore]]
+=== Trust Store
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The location (which will be resolved relative to the current classpath and file system, if possible) of the trust store. |  | 
+| Password a| String | The password used to protect the trust store. |  | 
+| Type a| String | The type of store used. |  | 
+| Algorithm a| String | The algorithm used by the trust store. |  | 
+| Insecure a| Boolean | If true, no certificate validations will be performed, rendering connections vulnerable to attacks. Use at your own risk. |  | 
+|======================
+
+[[KeyStore]]
+=== Key Store
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The location (which will be resolved relative to the current classpath and file system, if possible) of the key store. |  | 
+| Type a| String | The type of store used. |  | 
+| Alias a| String | When the key store contains many private keys, this attribute indicates the alias of the key that should be used. If not defined, the first key in the file will be used by default. |  | 
+| Key Password a| String | The password used to protect the private key. |  | 
+| Password a| String | The password used to protect the key store. |  | 
+| Algorithm a| String | The algorithm used by the key store. |  | 
+|======================
+
+[[StandardRevocationCheck]]
+=== Standard Revocation Check
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Only End Entities a| Boolean | Only verify the last element of the certificate chain. |  | 
+| Prefer Crls a| Boolean | Try CRL instead of OCSP first. |  | 
+| No Fallback a| Boolean | Do not use the secondary checking method (the one not selected before). |  | 
+| Soft Fail a| Boolean | Avoid verification failure when the revocation server can not be reached or is busy. |  | 
+|======================
+
+[[CustomOcspResponder]]
+=== Custom Ocsp Responder
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Url a| String | The URL of the OCSP responder. |  | 
+| Cert Alias a| String | Alias of the signing certificate for the OCSP response (must be in the trust store), if present. |  | 
+|======================
+
+[[CrlFile]]
+=== Crl File
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The path to the CRL file. |  | 
+|======================
+
+[[ExpirationPolicy]]
+=== Expiration Policy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Max Idle Time a| Number | A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration |  | 
+| Time Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS | A time unit that qualifies the maxIdleTime attribute |  | 
+|======================
+
+[[HttpResponseAttributes]]
+=== Http Response Attributes
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Status Code a| Number |  |  | x
+| Headers a| Object |  |  | x
+| Reason Phrase a| String |  |  | x
+|======================
+
+[[RepeatableInMemoryStream]]
+=== Repeatable In Memory Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Initial Buffer Size a| Number | This is the amount of memory that will be allocated in order to consume the stream and provide random access to it. If the stream contains more data than can be fit into this buffer, then it will be expanded by according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize. |  | 
+| Buffer Size Increment a| Number | This is by how much will be buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full. |  | 
+| Max Buffer Size a| Number | This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which all these attributes are expressed |  | 
+|======================
+
+[[RepeatableFileStoreStream]]
+=== Repeatable File Store Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| In Memory Size a| Number | Defines the maximum memory that the stream should use to keep data in memory. If more than that is consumed then it will start to buffer the content on disk. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which maxInMemorySize is expressed |  | 
+|======================
+
